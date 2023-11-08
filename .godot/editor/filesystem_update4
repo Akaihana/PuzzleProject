@@ -1,0 +1,16 @@
+res://Scripts/Piece.gd
+res://Scenes/piece.tscn
+res://Scenes/main.tscn
+res://Scripts/piece_data.gd
+res://Scripts/shared.gd
+res://Scripts/gem.gd
+res://Scripts/gem_data.gd
+res://Resources/gem_blue_data.tres
+res://Resources/gem_green_data.tres
+res://Resources/gem_yellow_data.tres
+res://Scenes/gem.tscn
+res://Scripts/gem_spawner.gd
+res://Scripts/gem_container.gd
+res://Scenes/gem_container.tscn
+res://Resources/gem_red_data.tres
+res://Scripts/grid.gd

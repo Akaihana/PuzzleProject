@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://de8o4tpknucry"]
+
+[ext_resource type="Script" path="res://Scripts/grid.gd" id="1_8qrqb"]
+[ext_resource type="Texture2D" uid="uid://cs1o6olpvgjc1" path="res://Assets/Sprites/Grid.png" id="1_nuqr3"]
+[ext_resource type="Script" path="res://Scripts/gem_spawner.gd" id="2_jqgu4"]
+[ext_resource type="PackedScene" uid="uid://c1eou1cdb7ov6" path="res://Scenes/gem_container.tscn" id="2_rldxo"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Grid" type="Node2D" parent="."]
+position = Vector2(64, 40)
+script = ExtResource("1_8qrqb")
+gem_container_scene = ExtResource("2_rldxo")
+
+[node name="GridTexture" type="TextureRect" parent="Grid"]
+offset_right = 480.0
+offset_bottom = 960.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_nuqr3")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StartingPosition" type="Marker2D" parent="Grid"]
+position = Vector2(108, 12)
+
+[node name="GemSpawner" type="Node2D" parent="."]
+script = ExtResource("2_jqgu4")

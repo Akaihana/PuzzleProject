@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cw7jblwdgu0pu"]
+
+[ext_resource type="Texture2D" uid="uid://bkb6f8dshsyep" path="res://Assets/Sprites/YellowGem.png" id="1_5t77e"]
+[ext_resource type="Script" path="res://Scripts/gem_data.gd" id="2_wg27b"]
+
+[resource]
+script = ExtResource("2_wg27b")
+gem_texture = ExtResource("1_5t77e")
+gem_type = 3
+spawn_position = Vector2(0, 0)
