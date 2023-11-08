@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqjw3bw6sktw4"
-path="res://.godot/imported/RedGem.png-9fff74ce34817bedb68853e449579fb9.ctex"
+uid="uid://6pxkrf36hklp"
+path="res://.godot/imported/tileRed_48.png-a3b5e2c4c5035788196f24ccc146f092.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/RedGem.png"
-dest_files=["res://.godot/imported/RedGem.png-9fff74ce34817bedb68853e449579fb9.ctex"]
+source_file="res://Assets/Sprites/Viruses/tileRed_48.png"
+dest_files=["res://.godot/imported/tileRed_48.png-a3b5e2c4c5035788196f24ccc146f092.ctex"]
 
 [params]
 

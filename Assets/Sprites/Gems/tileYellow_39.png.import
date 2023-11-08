@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3cawq80vjjgm"
-path="res://.godot/imported/BlueGem.png-b82560a434a6cebd99cc21073bde6b48.ctex"
+uid="uid://bo6rd8f6n48or"
+path="res://.godot/imported/tileYellow_39.png-0a393a5ac697f9d6279ce5d94b3333f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/BlueGem.png"
-dest_files=["res://.godot/imported/BlueGem.png-b82560a434a6cebd99cc21073bde6b48.ctex"]
+source_file="res://Assets/Sprites/Gems/tileYellow_39.png"
+dest_files=["res://.godot/imported/tileYellow_39.png-0a393a5ac697f9d6279ce5d94b3333f8.ctex"]
 
 [params]
 

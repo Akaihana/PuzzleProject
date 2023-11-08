@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://c7uqgojnk1026"]
 
-[ext_resource type="Texture2D" uid="uid://d3cawq80vjjgm" path="res://Assets/Sprites/BlueGem.png" id="1_h78tj"]
+[ext_resource type="Texture2D" uid="uid://b8vcxujhq6wbp" path="res://Assets/Sprites/Gems/tileBlue_39.png" id="1_nfja6"]
 [ext_resource type="Script" path="res://Scripts/gem_data.gd" id="2_c2vhj"]
 
 [resource]
 script = ExtResource("2_c2vhj")
-gem_texture = ExtResource("1_h78tj")
+gem_texture = ExtResource("1_nfja6")
 gem_type = 2
 spawn_position = Vector2(0, 0)
