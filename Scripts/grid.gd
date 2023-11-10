@@ -4,9 +4,12 @@ extends Node2D
 const ROWS = 20
 const COLUMNS = 10
 
+signal gem_locked
+
 @export var gem_container_scene: PackedScene
 
 var grid: Array = []
+var gems: Array[Gem] = []
 
 @onready var starting_position: Marker2D = $StartingPosition
 
@@ -19,6 +22,24 @@ func spawn_gem_container() -> void:
 	var gem_container = gem_container_scene.instantiate() as Gem_Container
 	add_child(gem_container)
 	gem_container.position = starting_position.position
+	gem_container.other_gems = gems
+	gem_container.lock_gem.connect(on_gem_locked)
+
+
+func on_gem_locked(gem_container: Gem_Container) -> void:
+	#append either the gems or the gem_contrainer to an array to hold within the grid
+	#maybe only append gems to the appropriate slot in the 2D grid for use
+	#TODO make a position to grid function to keep the color data within the grid
+	for gem in gem_container.gems:
+		gem.gem_position = gem_container.global_position + gem.position
+		gems.append(gem)
+		gem.reparent(self)
+	gem_container.queue_free()
+	gem_locked.emit()
+
+
+func on_lock_gem(gem_container: Gem_Container) -> void:
+	print("testing signal")
 
 
 func make_2d_array() -> Array:

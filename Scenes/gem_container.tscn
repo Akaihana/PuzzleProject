@@ -6,3 +6,20 @@
 script = ExtResource("1_nytvn")
 grid_offset_x = 64
 grid_offset_y = 64
+
+[node name="MoveDownTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="HoldDownTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HoldLeftTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="HoldRightTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="MoveDownTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="HoldDownTimer" to="." method="_on_hold_down_timer_timeout"]
+[connection signal="timeout" from="HoldLeftTimer" to="." method="_on_hold_left_timer_timeout"]
+[connection signal="timeout" from="HoldRightTimer" to="." method="_on_hold_right_timer_timeout"]

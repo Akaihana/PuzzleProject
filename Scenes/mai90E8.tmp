@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0lcwhpadgq44"]
+
+[ext_resource type="Script" path="res://Scripts/grid.gd" id="1_8qrqb"]
+[ext_resource type="Script" path="res://Scripts/gem_spawner.gd" id="2_jqgu4"]
+[ext_resource type="PackedScene" uid="uid://c1eou1cdb7ov6" path="res://Scenes/gem_container.tscn" id="2_rldxo"]
+[ext_resource type="Texture2D" uid="uid://cifupq4npmacr" path="res://Assets/Sprites/Grid/tileBlack_27.png" id="3_sl41j"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Grid" type="Node2D" parent="."]
+position = Vector2(64, 64)
+script = ExtResource("1_8qrqb")
+gem_container_scene = ExtResource("2_rldxo")
+
+[node name="GridTexture" type="TextureRect" parent="Grid"]
+modulate = Color(1, 1, 1, 0.490196)
+offset_right = 1080.0
+offset_bottom = 2160.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_sl41j")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StartingPosition" type="Marker2D" parent="Grid"]
+position = Vector2(121.5, 13.5)
+
+[node name="BottomRightBoundary" type="Marker2D" parent="Grid"]
+position = Vector2(270, 540)
+
+[node name="GemSpawner" type="Node2D" parent="."]
+script = ExtResource("2_jqgu4")

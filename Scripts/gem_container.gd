@@ -1,6 +1,8 @@
 class_name Gem_Container
 extends Node2D
 
+signal lock_gem(gem_container: Gem_Container)
+
 @export var grid_offset_x: int
 @export var grid_offset_y: int
 
@@ -12,16 +14,26 @@ var bounds = {
 
 var rotation_index: int
 var is_next_gem: bool
+var is_holding_left: bool
+var is_holding_right: bool
+var wall_kicks: Array[Vector2]
 var cells: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0)]
 var gems: Array[Gem]
+var other_gems: Array[Gem]
 var gem_data_one: Resource
 var gem_data_two: Resource
+
+@onready var move_down_timer: Timer = $MoveDownTimer
+@onready var hold_down_timer: Timer = $HoldDownTimer
+@onready var hold_left_timer: Timer = $HoldLeftTimer
+@onready var hold_right_timer: Timer = $HoldRightTimer
 
 @onready var gem_scene = preload("res://Scenes/gem.tscn")
 
 func _ready() -> void:
 	generate_gems()
-
+	wall_kicks = Shared.wall_kicks
+	_input(null)
 
 func generate_gems():
 	var gem_color_one = Shared.Gem_color.values().pick_random()
@@ -29,6 +41,7 @@ func generate_gems():
 	var gem_one = gem_scene.instantiate() as Gem
 	gems.append(gem_one)
 	add_child(gem_one)
+	gem_one.gem_color = gem_data_one.gem_type
 	gem_one.set_texture(gem_data_one.gem_texture)
 	
 	var gem_color_two = Shared.Gem_color.values().pick_random()
@@ -36,6 +49,7 @@ func generate_gems():
 	var gem_two = gem_scene.instantiate() as Gem
 	gems.append(gem_two)
 	add_child(gem_two)
+	gem_two.gem_color = gem_data_two.gem_type
 	gem_two.set_texture(gem_data_two.gem_texture)
 	gem_two.position = Vector2.RIGHT * gem_two.get_size()
 
@@ -45,13 +59,31 @@ func _input(_event: InputEvent) -> void:
 		move(Vector2.LEFT)
 	elif Input.is_action_just_pressed("right"):
 		move(Vector2.RIGHT)
-	elif Input.is_action_just_pressed("down"):
-		move(Vector2.DOWN)
-	elif Input.is_action_just_pressed("rotate_right"):
+		
+	if Input.is_action_pressed("left"):
+		hold_left_pressed()
+	elif Input.is_action_pressed("right"):
+		hold_right_pressed()
+		
+	if Input.is_action_just_released("left"):
+		hold_left_timer.stop()
+	elif Input.is_action_just_released("right"):
+		hold_right_timer.stop()
+		
+	#DOWN Input
+	if Input.is_action_just_pressed("down"):
+		tap_down()
+	if Input.is_action_pressed("down"):
+		hold_down_pressed()
+	elif Input.is_action_just_released("down"):
+		hold_down_released()
+	#Rotations
+	if Input.is_action_just_pressed("rotate_right"):
+		rotate_gems(-1)
+	elif Input.is_action_just_pressed("rotate_left"):
 		rotate_gems(1)
-	#TODO left rotation
-	#check rotation directions and add tweens to movements
-	
+
+
 func move(direction: Vector2) -> bool:
 	var new_position = calculate_global_position(direction, global_position)
 	if new_position != Vector2.ZERO:
@@ -60,11 +92,52 @@ func move(direction: Vector2) -> bool:
 	return false
 
 
+func tap_down():
+	if move(Vector2.DOWN):
+		move_down_timer.stop()
+		move_down_timer.start()
+
+
+func hold_down_pressed():
+	if hold_down_timer.is_stopped():
+		hold_down_timer.start()
+		move_down_timer.stop()
+
+
+func hold_down_released():
+	hold_down_timer.stop()
+	move_down_timer.start()
+
+
+func hold_left_pressed():
+	hold_right_timer.stop()
+	if hold_left_timer.is_stopped():
+		hold_left_timer.start()
+
+
+func hold_right_pressed():
+	hold_left_timer.stop()
+	if hold_right_timer.is_stopped():
+		hold_right_timer.start()
+
+
+
+
 func calculate_global_position(direction: Vector2, starting_global_position: Vector2) -> Vector2:
-	#TODO check if colliding with other gems/virus
+	#TODO check if colliding with virus
+	if is_colliding_with_other_gems(direction, starting_global_position):
+		return Vector2.ZERO
 	if not is_within_game_bounds(direction, starting_global_position):
 		return Vector2.ZERO
 	return starting_global_position + direction * gems[0].get_size().x
+
+
+func is_colliding_with_other_gems(direction: Vector2, starting_global_position: Vector2) -> bool:
+	for other_gem in other_gems:
+		for gem in gems:
+			if starting_global_position + gem.position + direction * gem.get_size().x == other_gem.gem_position:
+				return true
+	return false
 
 
 func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2) -> bool:
@@ -80,6 +153,18 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 func rotate_gems(direction: int) -> void:
 	var original_rotation_index = rotation_index
 	apply_rotation(direction)
+	rotation_index = wrap(rotation_index + direction, 0, 4)
+	if not test_wall_kicks(rotation_index, direction):
+		rotation_index = original_rotation_index
+		apply_rotation(-direction)
+
+
+func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
+	for i in wall_kicks.size():
+		var translation = wall_kicks[i]
+		if move(translation):
+			return true
+	return false
 
 
 func apply_rotation(direction: int) -> void:
@@ -91,3 +176,32 @@ func apply_rotation(direction: int) -> void:
 	for i in gems.size():
 		var gem = gems[i]
 		gem.position = cells[i] * gem.get_size()
+
+
+func lock():
+	print("lock")
+	move_down_timer.stop()
+	hold_down_timer.stop()
+	hold_left_timer.stop()
+	hold_right_timer.stop()
+	lock_gem.emit(self)
+	set_process_input(false)
+
+
+func _on_timer_timeout() -> void:
+	var should_lock = not move(Vector2.DOWN)
+	if should_lock:
+		lock()
+
+
+func _on_hold_down_timer_timeout() -> void:
+	if not move(Vector2.DOWN):
+		lock()
+
+
+func _on_hold_left_timer_timeout() -> void:
+	move(Vector2.LEFT)
+
+
+func _on_hold_right_timer_timeout() -> void:
+	move(Vector2.RIGHT)
