@@ -11,7 +11,7 @@ grid_offset_y = 64
 autostart = true
 
 [node name="HoldDownTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="HoldLeftTimer" type="Timer" parent="."]
 wait_time = 0.1

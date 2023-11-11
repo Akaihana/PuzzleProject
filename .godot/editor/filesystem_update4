@@ -1,7 +1,4 @@
 res://Scenes/main.tscn
+res://Scripts/grid.gd
 res://Scenes/gem.tscn
 res://Scenes/gem_container.tscn
-res://Scripts/gem_container.gd
-res://Scripts/grid.gd
-res://Scripts/gem.gd
-res://Scripts/shared.gd
