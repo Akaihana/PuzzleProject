@@ -27,5 +27,10 @@ position = Vector2(121.5, 13.5)
 [node name="BottomRightBoundary" type="Marker2D" parent="Grid"]
 position = Vector2(270, 540)
 
+[node name="DestroyTimer" type="Timer" parent="Grid"]
+wait_time = 0.5
+
 [node name="GemSpawner" type="Node2D" parent="."]
 script = ExtResource("2_jqgu4")
+
+[connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]

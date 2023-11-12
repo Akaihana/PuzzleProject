@@ -3,8 +3,6 @@ extends Node2D
 
 signal lock_gem(gem_container: Gem_Container)
 
-@export var grid_offset_x: int
-@export var grid_offset_y: int
 
 var bounds = {
 	"min_x": 0,
@@ -12,6 +10,8 @@ var bounds = {
 	"max_y": 540
 }
 
+var grid_offset_x: float
+var grid_offset_y: float
 var rotation_index: int
 var is_next_gem: bool
 var is_holding_left: bool
@@ -31,6 +31,8 @@ var gem_data_two: Resource
 @onready var gem_scene = preload("res://Scenes/gem.tscn")
 
 func _ready() -> void:
+	grid_offset_x = global_position.x
+	grid_offset_y = global_position.y
 	generate_gems()
 	wall_kicks = Shared.wall_kicks
 	_input(null)
