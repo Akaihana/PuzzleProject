@@ -1,7 +1,7 @@
-class_name Gem_Container
+class_name GemContainer
 extends Node2D
 
-signal lock_gem(gem_container: Gem_Container)
+signal lock_gem(gem_container: GemContainer)
 
 
 var bounds = {

@@ -1,3 +1,4 @@
+class_name GemSpawner
 extends Node2D
 
 @onready var grid: Node2D = $"../Grid"

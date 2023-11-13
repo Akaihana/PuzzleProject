@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bqc51qh2jllvk"]
+
+[ext_resource type="Texture2D" uid="uid://badjsqbg8vnrm" path="res://Assets/Sprites/Viruses/tileBlue_46.png" id="1_5hcfr"]
+[ext_resource type="Script" path="res://Scripts/corrupted_gem_data.gd" id="2_vxyk6"]
+
+[resource]
+script = ExtResource("2_vxyk6")
+corrupted_gem_texture = ExtResource("1_5hcfr")
+corrupted_gem_type = 2

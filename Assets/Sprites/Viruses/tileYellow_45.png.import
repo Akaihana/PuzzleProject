@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://43cik7rujpq1"
-path="res://.godot/imported/tileYellow_44.png-b34f1231ddd8c81a4fd4b70693d4c96c.ctex"
+uid="uid://dgyxa643sc3vu"
+path="res://.godot/imported/tileYellow_45.png-dbf8378d320e483bff511fce637203c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Viruses/tileYellow_44.png"
-dest_files=["res://.godot/imported/tileYellow_44.png-b34f1231ddd8c81a4fd4b70693d4c96c.ctex"]
+source_file="res://Assets/Sprites/Viruses/tileYellow_45.png"
+dest_files=["res://.godot/imported/tileYellow_45.png-dbf8378d320e483bff511fce637203c9.ctex"]
 
 [params]
 

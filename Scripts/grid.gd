@@ -7,7 +7,10 @@ const COLUMNS = 10
 signal gem_locked
 
 @export var gem_container_scene: PackedScene
+@export var corrupted_gem_scene: PackedScene
+@export var corrupted_count: int
 
+var current_level: int = 1
 var grid_slot_radius: float = 27.0
 var found_matches: bool
 var grid: Array = []
@@ -21,15 +24,31 @@ var current_matches: Array = []
 
 func _ready() -> void:
 	grid = make_2d_array()
+	start_level()
 	print_grid()
 
 
 func spawn_gem_container() -> void:
-	var gem_container = gem_container_scene.instantiate() as Gem_Container
+	var gem_container = gem_container_scene.instantiate() as GemContainer
 	add_child(gem_container)
 	gem_container.position = starting_position.position
 	gem_container.other_gems = fill_gems_array()
 	gem_container.lock_gem.connect(on_gem_locked)
+
+
+func start_level() -> void:
+	for color in Shared.Gem_color:
+		for i in corrupted_count:
+			var current_color = Shared.Gem_color[color]
+			var corrupted_gem_data = Shared.data_corrupted[current_color]
+			var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
+			add_child(corrupted_gem)
+			var random_r = randi_range(0, 10)
+			var random_c = randi_range(0, 9)
+			corrupted_gem.global_position = grid_to_position(random_r, random_c)
+			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
+			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
+			grid[random_r][random_c] = corrupted_gem
 
 
 func fill_gems_array() -> Array:
@@ -41,7 +60,7 @@ func fill_gems_array() -> Array:
 	return gems
 
 
-func on_gem_locked(gem_container: Gem_Container) -> void:
+func on_gem_locked(gem_container: GemContainer) -> void:
 	for gem in gem_container.gems:
 		gem.gem_position = gem_container.global_position + gem.position
 		var grid_position = position_to_grid(gem.gem_position)
@@ -147,14 +166,13 @@ func make_gems_fall() -> void:
 						grid[current_row][c] = grid[current_row + 1][c]
 						grid[current_row + 1][c] = null
 						current_row -= 1
-						
 	found_matches = false
 	check_for_matches()
 	print_grid()
 	print("finished falling")
 
 
-func on_lock_gem(gem_container: Gem_Container) -> void:
+func on_lock_gem(gem_container: GemContainer) -> void:
 	print("testing signal")
 
 
@@ -172,8 +190,8 @@ func print_grid() -> void:
 	for r in grid.size():
 		var line: String = str(r) + "\t"
 		for c in grid[r].size():
-			if grid[r][c] != null and grid[r][c].can_fall:
-				line += "F"
+			if grid[r][c] is CorruptedGem:
+				line += "C"
 			elif(grid[r][c] != null and grid[r][c].gem_color == Shared.Gem_color.RED):
 				line += "R"
 			elif(grid[r][c] != null and grid[r][c].gem_color == Shared.Gem_color.GREEN):

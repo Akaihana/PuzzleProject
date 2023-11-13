@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy3dsvl8jfhqa"
-path="res://.godot/imported/tileGreen_42.png-fec953fe0c465ec34390dc17cbd50387.ctex"
+uid="uid://du4le6qwosv3"
+path="res://.godot/imported/tileGreen_44.png-211dfa051de9c759f0b35ef8caf0ccd2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Viruses/tileGreen_42.png"
-dest_files=["res://.godot/imported/tileGreen_42.png-fec953fe0c465ec34390dc17cbd50387.ctex"]
+source_file="res://Assets/Sprites/Viruses/tileGreen_44.png"
+dest_files=["res://.godot/imported/tileGreen_44.png-211dfa051de9c759f0b35ef8caf0ccd2.ctex"]
 
 [params]
 

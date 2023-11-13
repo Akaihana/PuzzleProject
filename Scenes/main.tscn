@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0lcwhpadgq44"]
+[gd_scene load_steps=7 format=3 uid="uid://d0lcwhpadgq44"]
 
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="1_8qrqb"]
 [ext_resource type="Script" path="res://Scripts/gem_spawner.gd" id="2_jqgu4"]
 [ext_resource type="PackedScene" uid="uid://c1eou1cdb7ov6" path="res://Scenes/gem_container.tscn" id="2_rldxo"]
+[ext_resource type="PackedScene" uid="uid://dlihauw0nhjtp" path="res://Scenes/corrupted_gem.tscn" id="3_dxh0i"]
 [ext_resource type="Texture2D" uid="uid://cifupq4npmacr" path="res://Assets/Sprites/Grid/tileBlack_27.png" id="3_sl41j"]
+[ext_resource type="Script" path="res://Scripts/corrupted_gem_spawner.gd" id="5_fntxq"]
 
 [node name="Main" type="Node2D"]
 
@@ -11,6 +13,8 @@
 position = Vector2(64, 64)
 script = ExtResource("1_8qrqb")
 gem_container_scene = ExtResource("2_rldxo")
+corrupted_gem_scene = ExtResource("3_dxh0i")
+corrupted_count = 2
 
 [node name="GridTexture" type="TextureRect" parent="Grid"]
 modulate = Color(1, 1, 1, 0.490196)
@@ -38,8 +42,8 @@ one_shot = true
 [node name="GemSpawner" type="Node2D" parent="."]
 script = ExtResource("2_jqgu4")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(168.5, 573.5)
+[node name="CorruptedGemSpawner" type="Node2D" parent="."]
+script = ExtResource("5_fntxq")
 
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]
