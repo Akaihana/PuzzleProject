@@ -1,6 +1,11 @@
 res://Scenes/main.tscn
-res://Scenes/gem.tscn
-res://Scenes/gem_container.tscn
-res://Scripts/gem_container.gd
 res://Scripts/grid.gd
 res://Scripts/gem.gd
+res://Scripts/gem_container.gd
+res://Scenes/gem.tscn
+res://Scenes/gem_container.tscn
+res://Scripts/gem_data.gd
+res://Resources/gem_red_data.tres
+res://Resources/gem_green_data.tres
+res://Resources/gem_blue_data.tres
+res://Resources/gem_yellow_data.tres

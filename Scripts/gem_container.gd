@@ -19,7 +19,7 @@ var is_holding_right: bool
 var wall_kicks: Array[Vector2]
 var cells: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0)]
 var gems: Array[Gem]
-var other_gems: Array[Gem]
+var other_gems: Array
 var gem_data_one: Resource
 var gem_data_two: Resource
 
@@ -54,6 +54,9 @@ func generate_gems():
 	gem_two.gem_color = gem_data_two.gem_type
 	gem_two.set_texture(gem_data_two.gem_texture)
 	gem_two.position = Vector2.RIGHT * gem_two.get_size()
+	
+	gem_one.paired_gem = gem_two
+	gem_two.paired_gem = gem_one
 
 
 func _input(_event: InputEvent) -> void:
@@ -72,14 +75,13 @@ func _input(_event: InputEvent) -> void:
 	elif Input.is_action_just_released("right"):
 		hold_right_timer.stop()
 		
-	#DOWN Input
 	if Input.is_action_just_pressed("down"):
 		tap_down()
 	if Input.is_action_pressed("down"):
 		hold_down_pressed()
 	elif Input.is_action_just_released("down"):
 		hold_down_released()
-	#Rotations
+		
 	if Input.is_action_just_pressed("rotate_right"):
 		rotate_gems(-1)
 	elif Input.is_action_just_pressed("rotate_left"):

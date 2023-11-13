@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c7uqgojnk1026"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://c7uqgojnk1026"]
 
 [ext_resource type="Texture2D" uid="uid://b8vcxujhq6wbp" path="res://Assets/Sprites/Gems/tileBlue_39.png" id="1_nfja6"]
 [ext_resource type="Script" path="res://Scripts/gem_data.gd" id="2_c2vhj"]
+[ext_resource type="Texture2D" uid="uid://c1gluftmup8xe" path="res://Assets/Sprites/Gems/tileBlue_42.png" id="2_yi3u3"]
 
 [resource]
 script = ExtResource("2_c2vhj")
 gem_texture = ExtResource("1_nfja6")
+gem_texture_unpaired = ExtResource("2_yi3u3")
 gem_type = 2
-spawn_position = Vector2(0, 0)
