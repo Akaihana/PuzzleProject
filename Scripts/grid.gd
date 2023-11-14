@@ -15,6 +15,7 @@ var grid_slot_radius: float = 27.0
 var found_matches: bool
 var grid: Array = []
 var current_matches: Array = []
+var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 
 @onready var starting_position: Marker2D = $StartingPosition
 @onready var bottom_right_boundary: Marker2D = $BottomRightBoundary
@@ -38,14 +39,19 @@ func spawn_gem_container() -> void:
 
 func start_level() -> void:
 	for color in Shared.Gem_color:
-		for i in corrupted_count:
+		for i in range(corrupted_count + current_level):
 			var current_color = Shared.Gem_color[color]
+			corrupted_count_keeper[current_color] += 1
 			var corrupted_gem_data = Shared.data_corrupted[current_color]
 			var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
 			add_child(corrupted_gem)
 			var random_r = randi_range(0, 10)
 			var random_c = randi_range(0, 9)
+			while grid[random_r][random_c] != null:
+				random_r = randi_range(0, 10)
+				random_c = randi_range(0, 9)
 			corrupted_gem.global_position = grid_to_position(random_r, random_c)
+			corrupted_gem.gem_position = grid_to_position(random_r, random_c)
 			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
 			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 			grid[random_r][random_c] = corrupted_gem
@@ -110,7 +116,7 @@ func check_for_matches() -> void:
 		gem_locked.emit()
 
 
-func match_and_dim(gem: Gem) -> void:
+func match_and_dim(gem) -> void:
 	gem.matched = true
 	gem.dim()
 
@@ -119,21 +125,22 @@ func destroy_matched() -> void:
 	for r in ROWS:
 		for c in COLUMNS:
 			if grid[r][c] != null and grid[r][c].matched:
-				if grid[r][c].paired_gem != null:
+				if grid[r][c] is Gem and grid[r][c].paired_gem != null:
 					var other_gem = grid[r][c].paired_gem
 					other_gem.can_fall = true
 					other_gem.set_texture(Shared.data[other_gem.gem_color].gem_texture_unpaired)
+				elif grid[r][c] is CorruptedGem:
+					corrupted_count_keeper[grid[r][c].gem_color] -= 1
 				grid[r][c].queue_free()
 				grid[r][c] = null
 	fall_timer.start()
 	current_matches.clear()
-	print_grid()
 
 
 func make_gems_fall() -> void:
 	for r in ROWS:
 		for c in COLUMNS:
-			if grid[r][c] != null and grid[r][c].can_fall:
+			if grid[r][c] != null and grid[r][c] is Gem and grid[r][c].can_fall:
 				var current_row = r
 				while current_row > 0 and grid[current_row-1][c] == null:
 					grid[current_row][c].move(grid_to_position(current_row - 1, c))
@@ -141,7 +148,7 @@ func make_gems_fall() -> void:
 					grid[current_row - 1][c] = grid[current_row][c]
 					grid[current_row][c] = null
 					current_row -= 1
-			if grid[r][c] != null and not grid[r][c].can_fall:
+			if grid[r][c] != null and grid[r][c] is Gem and not grid[r][c].can_fall:
 				var paired_gem = grid[r][c].paired_gem
 				var current_row = r
 				if c < COLUMNS - 1 and paired_gem == grid[r][c + 1]:
@@ -169,7 +176,6 @@ func make_gems_fall() -> void:
 	found_matches = false
 	check_for_matches()
 	print_grid()
-	print("finished falling")
 
 
 func on_lock_gem(gem_container: GemContainer) -> void:
@@ -203,9 +209,9 @@ func print_grid() -> void:
 			else:
 				line += "-"
 		debug_grid_display.append(line)
-	
 	for r in debug_grid_display.size():
 		print(debug_grid_display[debug_grid_display.size() - 1 - r])
+	print()
 
 
 func _on_destroy_timer_timeout() -> void:

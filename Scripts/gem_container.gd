@@ -128,7 +128,6 @@ func hold_right_pressed():
 
 
 func calculate_global_position(direction: Vector2, starting_global_position: Vector2) -> Vector2:
-	#TODO check if colliding with virus
 	if is_colliding_with_other_gems(direction, starting_global_position):
 		return Vector2.ZERO
 	if not is_within_game_bounds(direction, starting_global_position):
@@ -183,7 +182,6 @@ func apply_rotation(direction: int) -> void:
 
 
 func lock():
-	print("lock")
 	move_down_timer.stop()
 	hold_down_timer.stop()
 	hold_left_timer.stop()

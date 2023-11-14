@@ -7,6 +7,7 @@ var matched: bool
 var gem_color: Shared.Gem_color
 var gem_position: Vector2
 
+@onready var sprite_background: Sprite2D = $SpriteBackground
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
@@ -24,4 +25,6 @@ func get_size() -> Vector2:
 
 
 func dim() -> void:
+	sprite_background.modulate = Color(1, 1, 1, 0.5)
 	sprite_2d.modulate = Color(1, 1, 1, 0.5)
+	
