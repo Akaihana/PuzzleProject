@@ -1,9 +1,11 @@
 res://Scenes/main.tscn
+res://Scripts/lose_menu.gd
+res://Scenes/lose_menu.tscn
 res://Scenes/main_menu.tscn
-res://Scenes/pause_menu.tscn
-res://Scripts/pause_menu.gd
 res://Scenes/gem.tscn
 res://Scenes/corrupted_gem.tscn
-res://Scripts/main_menu.gd
 res://Scenes/level_transition.tscn
+res://Scenes/pause_menu.tscn
 res://Scripts/grid.gd
+res://Scenes/win_menu.tscn
+res://Scripts/win_menu.gd

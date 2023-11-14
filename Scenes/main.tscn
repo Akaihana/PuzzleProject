@@ -1,18 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0lcwhpadgq44"]
+[gd_scene load_steps=11 format=3 uid="uid://d0lcwhpadgq44"]
 
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="1_8qrqb"]
 [ext_resource type="PackedScene" uid="uid://dy4e4velmavcu" path="res://Scenes/pause_menu.tscn" id="1_rayih"]
 [ext_resource type="Script" path="res://Scripts/gem_spawner.gd" id="2_jqgu4"]
+[ext_resource type="PackedScene" uid="uid://brv0bkjovmxg6" path="res://Scenes/lose_menu.tscn" id="2_q40m1"]
 [ext_resource type="PackedScene" uid="uid://c1eou1cdb7ov6" path="res://Scenes/gem_container.tscn" id="2_rldxo"]
 [ext_resource type="PackedScene" uid="uid://dlihauw0nhjtp" path="res://Scenes/corrupted_gem.tscn" id="3_dxh0i"]
+[ext_resource type="PackedScene" uid="uid://bhofl6nsn4b45" path="res://Scenes/win_menu.tscn" id="3_opu7y"]
 [ext_resource type="Texture2D" uid="uid://cifupq4npmacr" path="res://Assets/Sprites/Grid/tileBlack_27.png" id="3_sl41j"]
 [ext_resource type="Script" path="res://Scripts/corrupted_gem_spawner.gd" id="5_fntxq"]
+[ext_resource type="Texture2D" uid="uid://7hhpigcjv3jt" path="res://Assets/Sprites/Viruses/tileGrey_39.png" id="6_ckbq1"]
 
 [node name="Main" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("1_rayih")]
+visible = false
+
+[node name="LoseMenu" parent="CanvasLayer" instance=ExtResource("2_q40m1")]
+visible = false
+
+[node name="WinMenu" parent="CanvasLayer" instance=ExtResource("3_opu7y")]
 visible = false
 
 [node name="Grid" type="Node2D" parent="."]
@@ -44,6 +53,18 @@ one_shot = true
 [node name="FallTimer" type="Timer" parent="Grid"]
 wait_time = 0.5
 one_shot = true
+
+[node name="LoseZone" type="Sprite2D" parent="Grid"]
+modulate = Color(1, 0, 0, 0.196078)
+position = Vector2(121.5, 13.5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_ckbq1")
+
+[node name="LoseZone2" type="Sprite2D" parent="Grid"]
+modulate = Color(1, 0, 0, 0.196078)
+position = Vector2(148.5, 13.5)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_ckbq1")
 
 [node name="GemSpawner" type="Node2D" parent="."]
 script = ExtResource("2_jqgu4")

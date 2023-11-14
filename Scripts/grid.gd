@@ -5,6 +5,8 @@ const ROWS = 20
 const COLUMNS = 10
 
 signal gem_locked
+signal game_over
+signal level_cleared
 
 @export var gem_container_scene: PackedScene
 @export var corrupted_gem_scene: PackedScene
@@ -47,9 +49,11 @@ func start_level() -> void:
 			add_child(corrupted_gem)
 			var random_r = randi_range(0, 10)
 			var random_c = randi_range(0, 9)
-			while grid[random_r][random_c] != null:
+			var loops = 0
+			while grid[random_r][random_c] != null and loops < 100:
 				random_r = randi_range(0, 10)
 				random_c = randi_range(0, 9)
+				loops += 1
 			corrupted_gem.global_position = grid_to_position(random_r, random_c)
 			corrupted_gem.gem_position = grid_to_position(random_r, random_c)
 			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
@@ -113,7 +117,16 @@ func check_for_matches() -> void:
 	if found_matches:
 		destroy_timer.start()
 	else:
-		gem_locked.emit()
+		if check_for_lose():
+			game_over.emit()
+		else:
+			gem_locked.emit()
+
+
+func check_for_lose() -> bool:
+	if grid[ROWS - 1][COLUMNS/2 - 1] != null or grid[ROWS - 1][COLUMNS/2] != null:
+		return true
+	return false
 
 
 func match_and_dim(gem) -> void:
@@ -178,9 +191,18 @@ func make_gems_fall() -> void:
 	print_grid()
 
 
-func on_lock_gem(gem_container: GemContainer) -> void:
-	print("testing signal")
+func retry_level() -> void:
+	clear_grid()
+	start_level()
+	gem_locked.emit()
 
+
+func clear_grid() -> void:
+	for r in ROWS:
+		for c in COLUMNS:
+			if grid[r][c] != null:
+				grid[r][c].queue_free()
+				grid[r][c] = null
 
 func make_2d_array() -> Array:
 	var array = []

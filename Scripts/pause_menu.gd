@@ -8,6 +8,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = true
 		show()
 		resume_button.grab_focus()
+		
 
 
 func _on_resume_button_pressed() -> void:
