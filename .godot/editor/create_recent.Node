@@ -1,6 +1,9 @@
-Button
+TextureRect
 Label
+HBoxContainer
 VBoxContainer
+Panel
+Button
 CenterContainer
 ColorRect
 Sprite2D
@@ -11,4 +14,3 @@ CollisionShape2D
 Area2D
 Marker2D
 Timer
-TextureRect
