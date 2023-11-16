@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6eaxj1uraiv0"]
+[gd_scene load_steps=6 format=3 uid="uid://b6eaxj1uraiv0"]
 
+[ext_resource type="Texture2D" uid="uid://cx05cwb0bkn61" path="res://Assets/Sprites/Gems/tileRed_39.png" id="1_6p7at"]
 [ext_resource type="Texture2D" uid="uid://6pxkrf36hklp" path="res://Assets/Sprites/Viruses/tileRed_48.png" id="1_gpcae"]
+[ext_resource type="Texture2D" uid="uid://du4le6qwosv3" path="res://Assets/Sprites/Viruses/tileGreen_44.png" id="2_1jukm"]
+[ext_resource type="Texture2D" uid="uid://badjsqbg8vnrm" path="res://Assets/Sprites/Viruses/tileBlue_46.png" id="3_cypet"]
+[ext_resource type="Texture2D" uid="uid://dgyxa643sc3vu" path="res://Assets/Sprites/Viruses/tileYellow_45.png" id="4_mx605"]
 
 [node name="InfoDisplay" type="Panel"]
 custom_minimum_size = Vector2(84, 540)
@@ -8,7 +12,41 @@ offset_left = 270.0
 offset_right = 310.0
 offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 27
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LeftGem" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(27, 27)
+layout_mode = 2
+texture = ExtResource("1_6p7at")
+expand_mode = 1
+
+[node name="LeftGem2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(27, 27)
+layout_mode = 2
+texture = ExtResource("1_6p7at")
+expand_mode = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -20,59 +58,63 @@ offset_top = -120.0
 offset_right = 25.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_bottom = 27
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
 texture = ExtResource("1_gpcae")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="RedCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "02"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
-texture = ExtResource("1_gpcae")
+texture = ExtResource("2_1jukm")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="GreenCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "02"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
-texture = ExtResource("1_gpcae")
+texture = ExtResource("3_cypet")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+[node name="BlueCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 text = "02"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer4"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/VBoxContainer/HBoxContainer4"]
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
-texture = ExtResource("1_gpcae")
+texture = ExtResource("4_mx605")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+[node name="YellowCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 text = "02"
