@@ -1,3 +1,9 @@
 res://Scenes/main.tscn
-res://Scenes/main_menu.tscn
+res://Scenes/ready_screen.tscn
 res://Scenes/info_display.tscn
+res://Scripts/info_display.gd
+res://Scripts/grid.gd
+res://Scripts/win_menu.gd
+res://Scenes/win_menu.tscn
+res://Scenes/pause_menu.tscn
+res://Scripts/pause_menu.gd

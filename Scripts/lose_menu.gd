@@ -12,15 +12,18 @@ func _ready() -> void:
 func show_lose_menu() -> void:
 	retry_button.grab_focus()
 	get_tree().paused = true
+	Shared.is_paused = true
 	show()
 
 
 func _on_retry_button_pressed() -> void:
 	get_tree().paused = false
+	Shared.is_paused = false
 	hide()
 	grid.retry_level()
 
 
 func _on_main_menu_button_pressed() -> void:
 	get_tree().paused = false
+	Shared.is_paused = false
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

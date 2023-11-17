@@ -10,33 +10,59 @@ signal level_cleared
 
 @export var gem_container_scene: PackedScene
 @export var corrupted_gem_scene: PackedScene
+@export var current_level: int = 1
 @export var corrupted_count: int
+@export var max_row_spawn: int
+@export var max_col_spawn: int
 
-var current_level: int = 1
 var grid_slot_radius: float = 27.0
 var found_matches: bool
 var grid: Array = []
 var current_matches: Array = []
+var next_gem_colors: Array = [0, 0]
 var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 
 @onready var starting_position: Marker2D = $StartingPosition
 @onready var bottom_right_boundary: Marker2D = $BottomRightBoundary
 @onready var destroy_timer: Timer = $DestroyTimer
 @onready var fall_timer: Timer = $FallTimer
+@onready var info_display: Panel = $InfoDisplay
+@onready var ready_screen: ColorRect = $"../CanvasLayer/ReadyScreen"
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
 	grid = make_2d_array()
+	info_display.update_level(current_level)
 	start_level()
-	print_grid()
+	get_tree().paused = true
+	Shared.is_paused = true
+	set_next_gem_colors()
+	ready_screen.visible = true
+	animation_player.play("ready")
+	await animation_player.animation_finished
+	get_tree().paused = false
+	Shared.is_paused = false
+	ready_screen.visible = false
+	spawn_gem_container()
+#	print_grid()
+
+func set_next_gem_colors():
+	next_gem_colors[0] = Shared.Gem_color.values().pick_random()
+	next_gem_colors[1] = Shared.Gem_color.values().pick_random()
+	info_display.update_next_gem(next_gem_colors)
 
 
 func spawn_gem_container() -> void:
 	var gem_container = gem_container_scene.instantiate() as GemContainer
 	add_child(gem_container)
+	gem_container.gem_data_one = Shared.data[next_gem_colors[0] as Shared.Gem_color]
+	gem_container.gem_data_two = Shared.data[next_gem_colors[1] as Shared.Gem_color]
+	gem_container.generate_gems()
 	gem_container.position = starting_position.position
 	gem_container.other_gems = fill_gems_array()
 	gem_container.lock_gem.connect(on_gem_locked)
+	set_next_gem_colors()
 
 
 func start_level() -> void:
@@ -47,18 +73,57 @@ func start_level() -> void:
 			var corrupted_gem_data = Shared.data_corrupted[current_color]
 			var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
 			add_child(corrupted_gem)
-			var random_r = randi_range(0, 10)
-			var random_c = randi_range(0, 9)
+			var random_r = randi_range(0, max_row_spawn)
+			var random_c = randi_range(0, max_col_spawn)
 			var loops = 0
 			while grid[random_r][random_c] != null and loops < 100:
-				random_r = randi_range(0, 10)
-				random_c = randi_range(0, 9)
+				random_r = randi_range(0, max_row_spawn)
+				random_c = randi_range(0, max_col_spawn)
+				loops += 1
+			loops = 0
+			while check_for_spawn_clears(current_color, random_r, random_c) and loops < 100:
+				print(current_color, random_r, random_c)
+				random_r = randi_range(0, max_row_spawn)
+				random_c = randi_range(0, max_col_spawn)
 				loops += 1
 			corrupted_gem.global_position = grid_to_position(random_r, random_c)
 			corrupted_gem.gem_position = grid_to_position(random_r, random_c)
 			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
 			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 			grid[random_r][random_c] = corrupted_gem
+	info_display.update_counts(corrupted_count_keeper)
+
+
+func check_for_spawn_clears(current_color: Shared.Gem_color, r: int, c: int) -> bool:
+	#check if spawning the virus here would cause a 4 in a row at start
+	current_color = current_color as Shared.Gem_color
+	if c >= 3 and grid[r][c - 3] != null and grid[r][c - 2] != null and grid[r][c - 1] != null:
+		if grid[r][c - 3].gem_color == current_color and grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color:
+			return true
+	if c >= 2  and c < COLUMNS - 1 and grid[r][c - 2] != null and grid[r][c - 1] != null and grid[r][c + 1] != null:
+		if grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color:
+			return true
+	if c >= 1 and c < COLUMNS - 2 and grid[r][c - 1] != null and grid[r][c + 1] != null and grid[r][c + 2] != null:
+		if grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color:
+			return true
+	if c < COLUMNS - 3 and grid[r][c + 1] != null and grid[r][c + 2] != null and grid[r][c + 3] != null: 
+		if grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color and grid[r][c + 3].gem_color == current_color:
+			return true
+		
+	#check if spawning the virus here would cause a 4 in a column at start
+	if r >= 3 and grid[r - 3][c] != null and grid[r - 2][c] != null and grid[r - 1][c] != null:
+		if grid[r - 3][c].gem_color == current_color and grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color:
+			return true
+	if r >= 2 and r < ROWS - 1 and grid[r - 2][c] != null and grid[r - 1][c] != null and grid[r + 1][c] != null: 
+		if  grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color:
+			return true
+	if r >= 1 and r < ROWS - 2  and grid[r - 1][c] != null and grid[r + 1][c] != null and grid[r + 2][c] != null: 
+		if grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color and grid[r - + 2][c].gem_color == current_color:
+			return true
+	if r < ROWS - 3 and grid[r + 1][c] != null and grid[r + 2][c] != null and grid[r + 3][c] != null: 
+		if grid[r + 1][c].gem_color == current_color and grid[r + 2][c].gem_color == current_color and grid[r + 3][c].gem_color == current_color:
+			return true
+	return false
 
 
 func fill_gems_array() -> Array:
@@ -76,10 +141,13 @@ func on_gem_locked(gem_container: GemContainer) -> void:
 		var grid_position = position_to_grid(gem.gem_position)
 		gem.grid_r = grid_position.x
 		gem.grid_c = grid_position.y
-		grid[gem.grid_r][gem.grid_c] = gem
-		gem.reparent(self)
+		if gem.grid_r >= 0 and gem.grid_r < ROWS and gem.grid_c >= 0 and gem.grid_c < COLUMNS:
+			grid[gem.grid_r][gem.grid_c] = gem
+			gem.reparent(self)
+		else:
+			gem.queue_free()
 	gem_container.queue_free()
-	print_grid()
+#	print_grid()
 	check_for_matches()
 
 
@@ -146,8 +214,28 @@ func destroy_matched() -> void:
 					corrupted_count_keeper[grid[r][c].gem_color] -= 1
 				grid[r][c].queue_free()
 				grid[r][c] = null
-	fall_timer.start()
+	info_display.update_counts(corrupted_count_keeper)
 	current_matches.clear()
+
+	if check_level_clear():
+		level_cleared.emit()
+	else:
+		fall_timer.start()
+
+
+func check_level_clear() -> bool:
+	var cleared = true
+	for count in corrupted_count_keeper:
+		if count != 0:
+			cleared = false
+	return cleared
+
+
+func next_level() -> void:
+	current_level += 1
+	clear_grid()
+	reset_corrupted_gem_count_keeper()
+	_ready()
 
 
 func make_gems_fall() -> void:
@@ -188,13 +276,17 @@ func make_gems_fall() -> void:
 						current_row -= 1
 	found_matches = false
 	check_for_matches()
-	print_grid()
+#	print_grid()
 
 
 func retry_level() -> void:
 	clear_grid()
-	start_level()
-	gem_locked.emit()
+	reset_corrupted_gem_count_keeper()
+	_ready()
+
+
+func reset_corrupted_gem_count_keeper():
+	corrupted_count_keeper = [0, 0, 0, 0]
 
 
 func clear_grid() -> void:

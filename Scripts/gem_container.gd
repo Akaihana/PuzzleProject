@@ -12,7 +12,7 @@ var bounds = {
 
 var grid_offset_x: float
 var grid_offset_y: float
-var rotation_index: int
+#var rotation_index: int
 var is_next_gem: bool
 var is_holding_left: bool
 var is_holding_right: bool
@@ -33,28 +33,22 @@ var gem_data_two: Resource
 func _ready() -> void:
 	grid_offset_x = global_position.x
 	grid_offset_y = global_position.y
-	generate_gems()
 	wall_kicks = Shared.wall_kicks
 	_input(null)
 
+
 func generate_gems():
-	var gem_color_one = Shared.Gem_color.values().pick_random()
-	gem_data_one = Shared.data[gem_color_one]
 	var gem_one = gem_scene.instantiate() as Gem
 	gems.append(gem_one)
 	add_child(gem_one)
 	gem_one.gem_color = gem_data_one.gem_type
 	gem_one.set_texture(gem_data_one.gem_texture)
-	
-	var gem_color_two = Shared.Gem_color.values().pick_random()
-	gem_data_two = Shared.data[gem_color_two]
 	var gem_two = gem_scene.instantiate() as Gem
 	gems.append(gem_two)
 	add_child(gem_two)
 	gem_two.gem_color = gem_data_two.gem_type
 	gem_two.set_texture(gem_data_two.gem_texture)
 	gem_two.position = Vector2.RIGHT * gem_two.get_size()
-	
 	gem_one.paired_gem = gem_two
 	gem_two.paired_gem = gem_one
 
@@ -125,14 +119,12 @@ func hold_right_pressed():
 		hold_right_timer.start()
 
 
-
-
 func calculate_global_position(direction: Vector2, starting_global_position: Vector2) -> Vector2:
 	if is_colliding_with_other_gems(direction, starting_global_position):
 		return Vector2.ZERO
 	if not is_within_game_bounds(direction, starting_global_position):
 		return Vector2.ZERO
-	return starting_global_position + direction * gems[0].get_size().x
+	return starting_global_position + direction * Shared.gem_size
 
 
 func is_colliding_with_other_gems(direction: Vector2, starting_global_position: Vector2) -> bool:
@@ -154,15 +146,15 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 
 
 func rotate_gems(direction: int) -> void:
-	var original_rotation_index = rotation_index
+#	var original_rotation_index = rotation_index
 	apply_rotation(direction)
-	rotation_index = wrap(rotation_index + direction, 0, 4)
-	if not test_wall_kicks(rotation_index, direction):
-		rotation_index = original_rotation_index
+#	rotation_index = wrap(rotation_index + direction, 0, 4)
+	if not test_wall_kicks():
+#		rotation_index = original_rotation_index
 		apply_rotation(-direction)
 
 
-func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
+func test_wall_kicks() -> bool:
 	for i in wall_kicks.size():
 		var translation = wall_kicks[i]
 		if move(translation):

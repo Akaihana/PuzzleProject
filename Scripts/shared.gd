@@ -2,6 +2,8 @@ extends Node
 
 enum Gem_color { RED, GREEN, BLUE, YELLOW }
 
+var gem_size: int = 27
+var is_paused: bool = false
 var wall_kicks: Array[Vector2] = [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0, -1), Vector2(0, 1)]
 
 var data: Dictionary = {

@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6eaxj1uraiv0"]
+[gd_scene load_steps=7 format=3 uid="uid://b6eaxj1uraiv0"]
 
+[ext_resource type="Script" path="res://Scripts/info_display.gd" id="1_5vq2h"]
 [ext_resource type="Texture2D" uid="uid://cx05cwb0bkn61" path="res://Assets/Sprites/Gems/tileRed_39.png" id="1_6p7at"]
 [ext_resource type="Texture2D" uid="uid://6pxkrf36hklp" path="res://Assets/Sprites/Viruses/tileRed_48.png" id="1_gpcae"]
 [ext_resource type="Texture2D" uid="uid://du4le6qwosv3" path="res://Assets/Sprites/Viruses/tileGreen_44.png" id="2_1jukm"]
@@ -11,6 +12,7 @@ custom_minimum_size = Vector2(84, 540)
 offset_left = 270.0
 offset_right = 310.0
 offset_bottom = 40.0
+script = ExtResource("1_5vq2h")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -35,16 +37,23 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="LeftGem" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
 texture = ExtResource("1_6p7at")
 expand_mode = 1
 
-[node name="LeftGem2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RightGem" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(27, 27)
 layout_mode = 2
 texture = ExtResource("1_6p7at")
 expand_mode = 1
+
+[node name="LevelDisplay" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Level: 1"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -74,8 +83,9 @@ texture = ExtResource("1_gpcae")
 expand_mode = 1
 
 [node name="RedCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "02"
+text = "00"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -88,8 +98,9 @@ texture = ExtResource("2_1jukm")
 expand_mode = 1
 
 [node name="GreenCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "02"
+text = "00"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -102,8 +113,9 @@ texture = ExtResource("3_cypet")
 expand_mode = 1
 
 [node name="BlueCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "02"
+text = "00"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer2/VBoxContainer"]
 layout_mode = 2
@@ -116,5 +128,6 @@ texture = ExtResource("4_mx605")
 expand_mode = 1
 
 [node name="YellowCount" type="Label" parent="MarginContainer2/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "02"
+text = "00"

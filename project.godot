@@ -20,6 +20,10 @@ config/icon="res://Assets/Icons/icon.svg"
 Shared="*res://Scripts/shared.gd"
 LevelTransition="*res://Scenes/level_transition.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/stretch/mode="canvas_items"

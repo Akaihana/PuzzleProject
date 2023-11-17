@@ -14,21 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://7hhpigcjv3jt" path="res://Assets/Sprites/Viruses/tileGrey_39.png" id="6_ckbq1"]
 [ext_resource type="PackedScene" uid="uid://b6eaxj1uraiv0" path="res://Scenes/info_display.tscn" id="9_danry"]
 
-[sub_resource type="Animation" id="Animation_0l60j"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../CanvasLayer/ReadyScreen/CenterContainer/ReadyLabel:text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["Ready..."]
-}
-
 [sub_resource type="Animation" id="Animation_e676u"]
 resource_name = "ready"
 length = 4.0
@@ -43,6 +28,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": ["Starting in: 3", "Starting in: 2", "Starting in: 1", "Go!"]
+}
+
+[sub_resource type="Animation" id="Animation_0l60j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CanvasLayer/ReadyScreen/CenterContainer/ReadyLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Ready..."]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q4xsm"]
@@ -73,8 +73,6 @@ script = ExtResource("1_8qrqb")
 gem_container_scene = ExtResource("2_rldxo")
 corrupted_gem_scene = ExtResource("3_dxh0i")
 corrupted_count = 1
-max_row_spawn = 14
-max_col_spawn = 9
 
 [node name="GridTexture" type="TextureRect" parent="Grid"]
 modulate = Color(1, 1, 1, 0.490196)
