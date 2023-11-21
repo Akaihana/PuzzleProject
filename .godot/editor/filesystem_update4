@@ -1,9 +1,10 @@
 res://Scenes/main.tscn
-res://Scenes/ready_screen.tscn
+res://Scripts/gem_container.gd
 res://Scenes/info_display.tscn
-res://Scripts/info_display.gd
-res://Scripts/grid.gd
-res://Scripts/win_menu.gd
 res://Scenes/win_menu.tscn
-res://Scenes/pause_menu.tscn
-res://Scripts/pause_menu.gd
+res://Scenes/main_menu.tscn
+res://Scenes/level_transition.tscn
+res://Scenes/gem_container.tscn
+res://Scenes/gem.tscn
+res://Scripts/grid.gd
+res://Scripts/gem.gd

@@ -67,8 +67,22 @@ visible = false
 [node name="ReadyScreen" parent="CanvasLayer" instance=ExtResource("4_rbu1x")]
 script = ExtResource("5_mlb83")
 
+[node name="TempInstructions" type="Label" parent="CanvasLayer"]
+offset_left = 776.0
+offset_top = 416.0
+offset_right = 1113.0
+offset_bottom = 624.0
+text = "Controls:
+Move: Left Arrow, Right Arrow, Down Arrow
+Rotate: Z, X
+Esc: Pause
+
+Instructions:
+Match 4 or more in Row or Column to clear
+Clear all unique pieces"
+
 [node name="Grid" type="Node2D" parent="."]
-position = Vector2(448, 64)
+position = Vector2(128, 64)
 script = ExtResource("1_8qrqb")
 gem_container_scene = ExtResource("2_rldxo")
 corrupted_gem_scene = ExtResource("3_dxh0i")
@@ -100,12 +114,14 @@ wait_time = 0.5
 one_shot = true
 
 [node name="LoseZone" type="Sprite2D" parent="Grid"]
+visible = false
 modulate = Color(1, 0, 0, 0.196078)
 position = Vector2(121.5, 13.5)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_ckbq1")
 
 [node name="LoseZone2" type="Sprite2D" parent="Grid"]
+visible = false
 modulate = Color(1, 0, 0, 0.196078)
 position = Vector2(148.5, 13.5)
 scale = Vector2(0.25, 0.25)
@@ -127,6 +143,9 @@ script = ExtResource("2_jqgu4")
 
 [node name="CorruptedGemSpawner" type="Node2D" parent="."]
 script = ExtResource("5_fntxq")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(224, 482.5)
 
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]

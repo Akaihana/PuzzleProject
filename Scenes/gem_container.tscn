@@ -4,6 +4,7 @@
 
 [node name="GemContainer" type="Node2D"]
 script = ExtResource("1_nytvn")
+fall_speed = 50.0
 
 [node name="MoveDownTimer" type="Timer" parent="."]
 autostart = true

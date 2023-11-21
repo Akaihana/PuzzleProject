@@ -1,3 +1,5 @@
+Marker2D
+CanvasLayer
 Label
 AnimationPlayer
 CenterContainer
@@ -9,9 +11,7 @@ MarginContainer
 Panel
 Button
 Sprite2D
-CanvasLayer
 Node2D
 CollisionShape2D
 Area2D
-Marker2D
 Timer

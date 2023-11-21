@@ -3,6 +3,9 @@ extends Node2D
 
 signal lock_gem(gem_container: GemContainer)
 
+@export var fall_speed: float = 5.0
+@export var grace_time: float = 0.3
+var grace_timer: float
 
 var bounds = {
 	"min_x": 0,

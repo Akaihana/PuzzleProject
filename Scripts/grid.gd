@@ -91,6 +91,20 @@ func start_level() -> void:
 			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
 			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 			grid[random_r][random_c] = corrupted_gem
+	
+	#spawning 1 virus
+#	corrupted_count_keeper[Shared.Gem_color.RED] += 1
+#	var corrupted_gem_data = Shared.data_corrupted[Shared.Gem_color.RED]
+#	var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
+#	add_child(corrupted_gem)
+#	var random_r = 4
+#	var random_c = 4
+#	corrupted_gem.global_position = grid_to_position(random_r, random_c)
+#	corrupted_gem.gem_position = grid_to_position(random_r, random_c)
+#	corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
+#	corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
+#	grid[random_r][random_c] = corrupted_gem
+
 	info_display.update_counts(corrupted_count_keeper)
 
 

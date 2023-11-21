@@ -2,36 +2,39 @@
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_g8aav"]
 
-[node name="MainMenu" type="CenterContainer"]
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="Container" type="CenterContainer" parent="."]
 process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 script = ExtResource("1_g8aav")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
 layout_mode = 2
 
-[node name="ArcadeModeButton" type="Button" parent="VBoxContainer"]
+[node name="ArcadeModeButton" type="Button" parent="Container/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Arcade Mode"
 
-[node name="OutbreakModeButton" type="Button" parent="VBoxContainer"]
+[node name="OutbreakModeButton" type="Button" parent="Container/VBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "Outbreak Mode"
 
-[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="Container/VBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "Settings"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="Container/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/ArcadeModeButton" to="." method="_on_arcade_mode_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/ArcadeModeButton" to="Container" method="_on_arcade_mode_button_pressed"]
+[connection signal="pressed" from="Container/VBoxContainer/QuitButton" to="Container" method="_on_quit_button_pressed"]
