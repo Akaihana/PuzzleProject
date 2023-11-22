@@ -4,7 +4,6 @@
 
 [node name="GemContainer" type="Node2D"]
 script = ExtResource("1_nytvn")
-fall_speed = 50.0
 
 [node name="MoveDownTimer" type="Timer" parent="."]
 autostart = true
@@ -13,12 +12,27 @@ autostart = true
 wait_time = 0.05
 
 [node name="HoldLeftTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="HoldRightTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="HoldLeftDelay" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
+
+[node name="HoldRightDelay" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="GraceTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
 
 [connection signal="timeout" from="MoveDownTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="HoldDownTimer" to="." method="_on_hold_down_timer_timeout"]
 [connection signal="timeout" from="HoldLeftTimer" to="." method="_on_hold_left_timer_timeout"]
 [connection signal="timeout" from="HoldRightTimer" to="." method="_on_hold_right_timer_timeout"]
+[connection signal="timeout" from="HoldLeftDelay" to="." method="_on_hold_left_delay_timeout"]
+[connection signal="timeout" from="HoldRightDelay" to="." method="_on_hold_right_delay_timeout"]
+[connection signal="timeout" from="GraceTimer" to="." method="_on_grace_timer_timeout"]

@@ -3,10 +3,6 @@ extends Node2D
 
 signal lock_gem(gem_container: GemContainer)
 
-@export var fall_speed: float = 5.0
-@export var grace_time: float = 0.3
-var grace_timer: float
-
 var bounds = {
 	"min_x": 0,
 	"max_x": 270,
@@ -15,7 +11,6 @@ var bounds = {
 
 var grid_offset_x: float
 var grid_offset_y: float
-#var rotation_index: int
 var is_next_gem: bool
 var is_holding_left: bool
 var is_holding_right: bool
@@ -26,10 +21,14 @@ var other_gems: Array
 var gem_data_one: Resource
 var gem_data_two: Resource
 
+
 @onready var move_down_timer: Timer = $MoveDownTimer
 @onready var hold_down_timer: Timer = $HoldDownTimer
 @onready var hold_left_timer: Timer = $HoldLeftTimer
 @onready var hold_right_timer: Timer = $HoldRightTimer
+@onready var hold_left_delay: Timer = $HoldLeftDelay
+@onready var hold_right_delay: Timer = $HoldRightDelay
+@onready var grace_timer: Timer = $GraceTimer
 
 @onready var gem_scene = preload("res://Scenes/gem.tscn")
 
@@ -37,9 +36,43 @@ func _ready() -> void:
 	grid_offset_x = global_position.x
 	grid_offset_y = global_position.y
 	wall_kicks = Shared.wall_kicks
-	_input(null)
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("left"):
+		move(Vector2.LEFT)
+		if hold_left_delay.is_stopped():
+			hold_left_delay.start()
+	elif Input.is_action_just_pressed("right"):
+		move(Vector2.RIGHT)
+		if hold_right_delay.is_stopped():
+			hold_right_delay.start()
+		
+	if Input.is_action_pressed("left"):
+		hold_left_pressed()
+	elif Input.is_action_pressed("right"):
+		hold_right_pressed()
+		
+	if Input.is_action_just_released("left"):
+		hold_left_delay.stop()
+		hold_left_timer.stop()
+	if Input.is_action_just_released("right"):
+		hold_right_delay.stop()
+		hold_right_timer.stop()
+		
+	if Input.is_action_just_pressed("down"):
+		tap_down()
+	if Input.is_action_pressed("down"):
+		hold_down_pressed()
+	elif Input.is_action_just_released("down"):
+		hold_down_released()
+		
+	if Input.is_action_just_pressed("rotate_right"):
+		rotate_gems(-1)
+	elif Input.is_action_just_pressed("rotate_left"):
+		rotate_gems(1)
+		
+		
 func generate_gems():
 	var gem_one = gem_scene.instantiate() as Gem
 	gems.append(gem_one)
@@ -54,35 +87,6 @@ func generate_gems():
 	gem_two.position = Vector2.RIGHT * gem_two.get_size()
 	gem_one.paired_gem = gem_two
 	gem_two.paired_gem = gem_one
-
-
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("left"):
-		move(Vector2.LEFT)
-	elif Input.is_action_just_pressed("right"):
-		move(Vector2.RIGHT)
-		
-	if Input.is_action_pressed("left"):
-		hold_left_pressed()
-	elif Input.is_action_pressed("right"):
-		hold_right_pressed()
-		
-	if Input.is_action_just_released("left"):
-		hold_left_timer.stop()
-	elif Input.is_action_just_released("right"):
-		hold_right_timer.stop()
-		
-	if Input.is_action_just_pressed("down"):
-		tap_down()
-	if Input.is_action_pressed("down"):
-		hold_down_pressed()
-	elif Input.is_action_just_released("down"):
-		hold_down_released()
-		
-	if Input.is_action_just_pressed("rotate_right"):
-		rotate_gems(-1)
-	elif Input.is_action_just_pressed("rotate_left"):
-		rotate_gems(1)
 
 
 func move(direction: Vector2) -> bool:
@@ -112,13 +116,13 @@ func hold_down_released():
 
 func hold_left_pressed():
 	hold_right_timer.stop()
-	if hold_left_timer.is_stopped():
+	if hold_left_delay.is_stopped() and hold_left_timer.is_stopped():
 		hold_left_timer.start()
 
 
 func hold_right_pressed():
 	hold_left_timer.stop()
-	if hold_right_timer.is_stopped():
+	if hold_right_delay.is_stopped() and hold_right_timer.is_stopped():
 		hold_right_timer.start()
 
 
@@ -149,12 +153,8 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 
 
 func rotate_gems(direction: int) -> void:
-#	var original_rotation_index = rotation_index
 	apply_rotation(direction)
-#	rotation_index = wrap(rotation_index + direction, 0, 4)
-	if not test_wall_kicks():
-#		rotation_index = original_rotation_index
-		apply_rotation(-direction)
+	test_wall_kicks()
 
 
 func test_wall_kicks() -> bool:
@@ -186,14 +186,19 @@ func lock():
 
 
 func _on_timer_timeout() -> void:
-	var should_lock = not move(Vector2.DOWN)
-	if should_lock:
-		lock()
+	if not move(Vector2.DOWN):
+		if grace_timer.is_stopped():
+			grace_timer.start()
+	else:
+		grace_timer.stop()
 
 
 func _on_hold_down_timer_timeout() -> void:
 	if not move(Vector2.DOWN):
-		lock()
+		if grace_timer.is_stopped():
+			grace_timer.start()
+	else:
+		grace_timer.stop()
 
 
 func _on_hold_left_timer_timeout() -> void:
@@ -202,3 +207,16 @@ func _on_hold_left_timer_timeout() -> void:
 
 func _on_hold_right_timer_timeout() -> void:
 	move(Vector2.RIGHT)
+
+
+func _on_hold_left_delay_timeout() -> void:
+	pass
+
+
+func _on_hold_right_delay_timeout() -> void:
+	is_holding_right = true
+
+
+func _on_grace_timer_timeout() -> void:
+	if not move(Vector2.DOWN):
+		lock()

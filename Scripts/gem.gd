@@ -31,5 +31,5 @@ func dim() -> void:
 
 func move(target: Vector2) -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "global_position", target, 0.5)
+	tween.tween_property(self, "global_position", target, 0.1)
 	

@@ -73,8 +73,8 @@ offset_top = 416.0
 offset_right = 1113.0
 offset_bottom = 624.0
 text = "Controls:
-Move: Left Arrow, Right Arrow, Down Arrow
-Rotate: Z, X
+Move: A, S, D
+Rotate: Left Arrow, Right Arrow
 Esc: Pause
 
 Instructions:
