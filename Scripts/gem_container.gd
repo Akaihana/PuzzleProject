@@ -28,6 +28,7 @@ var gem_data_two: Resource
 @onready var hold_right_timer: Timer = $HoldRightTimer
 @onready var hold_left_delay: Timer = $HoldLeftDelay
 @onready var hold_right_delay: Timer = $HoldRightDelay
+@onready var hold_down_delay: Timer = $HoldDownDelay
 @onready var grace_timer: Timer = $GraceTimer
 
 @onready var gem_scene = preload("res://Scenes/gem.tscn")
@@ -62,17 +63,20 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("down"):
 		tap_down()
+		if hold_down_delay.is_stopped():
+			hold_down_delay.start()
 	if Input.is_action_pressed("down"):
 		hold_down_pressed()
 	elif Input.is_action_just_released("down"):
-		hold_down_released()
+		hold_down_timer.stop()
+		move_down_timer.start()
 		
 	if Input.is_action_just_pressed("rotate_right"):
 		rotate_gems(-1)
 	elif Input.is_action_just_pressed("rotate_left"):
 		rotate_gems(1)
-		
-		
+	
+	
 func generate_gems():
 	var gem_one = gem_scene.instantiate() as Gem
 	gems.append(gem_one)
@@ -104,14 +108,9 @@ func tap_down():
 
 
 func hold_down_pressed():
-	if hold_down_timer.is_stopped():
+	if hold_down_delay.is_stopped() and hold_down_timer.is_stopped():
 		hold_down_timer.start()
 		move_down_timer.stop()
-
-
-func hold_down_released():
-	hold_down_timer.stop()
-	move_down_timer.start()
 
 
 func hold_left_pressed():
@@ -209,14 +208,9 @@ func _on_hold_right_timer_timeout() -> void:
 	move(Vector2.RIGHT)
 
 
-func _on_hold_left_delay_timeout() -> void:
-	pass
-
-
-func _on_hold_right_delay_timeout() -> void:
-	is_holding_right = true
-
-
 func _on_grace_timer_timeout() -> void:
 	if not move(Vector2.DOWN):
 		lock()
+
+
+

@@ -1,7 +1,9 @@
 extends Node
 
 enum Gem_color { RED, GREEN, BLUE, YELLOW }
+enum Game_modes { CLASSIC, ENDLESS }
 
+var current_game_mode: Game_modes = Game_modes.CLASSIC
 var gem_size: int = 27
 var is_paused: bool = false
 var wall_kicks: Array[Vector2] = [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0, -1), Vector2(0, 1)]

@@ -25,6 +25,10 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="HoldDownDelay" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
 [node name="GraceTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -33,6 +37,4 @@ one_shot = true
 [connection signal="timeout" from="HoldDownTimer" to="." method="_on_hold_down_timer_timeout"]
 [connection signal="timeout" from="HoldLeftTimer" to="." method="_on_hold_left_timer_timeout"]
 [connection signal="timeout" from="HoldRightTimer" to="." method="_on_hold_right_timer_timeout"]
-[connection signal="timeout" from="HoldLeftDelay" to="." method="_on_hold_left_delay_timeout"]
-[connection signal="timeout" from="HoldRightDelay" to="." method="_on_hold_right_delay_timeout"]
 [connection signal="timeout" from="GraceTimer" to="." method="_on_grace_timer_timeout"]

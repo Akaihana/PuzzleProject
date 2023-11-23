@@ -1,6 +1,8 @@
 class_name Gem
 extends Node2D
 
+@export var fall_time: float
+
 var grid_r: int
 var grid_c: int
 var can_fall: bool
@@ -31,5 +33,4 @@ func dim() -> void:
 
 func move(target: Vector2) -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "global_position", target, 0.1)
-	
+	tween.tween_property(self, "global_position", target, fall_time)

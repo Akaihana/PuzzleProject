@@ -12,11 +12,14 @@ signal level_cleared
 @export var corrupted_gem_scene: PackedScene
 @export var current_level: int = 1
 @export var corrupted_count: int
+@export var endless_corrupted_count: int
 @export var max_row_spawn: int
 @export var max_col_spawn: int
 
+var current_wave: int = 1
 var grid_slot_radius: float = 27.0
 var found_matches: bool
+var wave_cleared: bool
 var grid: Array = []
 var current_matches: Array = []
 var next_gem_colors: Array = [0, 0]
@@ -26,6 +29,7 @@ var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 @onready var bottom_right_boundary: Marker2D = $BottomRightBoundary
 @onready var destroy_timer: Timer = $DestroyTimer
 @onready var fall_timer: Timer = $FallTimer
+@onready var fall_delay: Timer = $FallDelay
 @onready var info_display: Panel = $InfoDisplay
 @onready var ready_screen: ColorRect = $"../CanvasLayer/ReadyScreen"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -34,7 +38,11 @@ var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 func _ready() -> void:
 	grid = make_2d_array()
 	info_display.update_level(current_level)
+	
+	#TODO
+	# check game mode to either start the level or start the wave
 	start_level()
+	
 	get_tree().paused = true
 	Shared.is_paused = true
 	set_next_gem_colors()
@@ -45,7 +53,7 @@ func _ready() -> void:
 	Shared.is_paused = false
 	ready_screen.visible = false
 	spawn_gem_container()
-#	print_grid()
+
 
 func set_next_gem_colors():
 	next_gem_colors[0] = Shared.Gem_color.values().pick_random()
@@ -66,44 +74,43 @@ func spawn_gem_container() -> void:
 
 
 func start_level() -> void:
-	for color in Shared.Gem_color:
-		for i in range(corrupted_count + current_level):
-			var current_color = Shared.Gem_color[color]
-			corrupted_count_keeper[current_color] += 1
-			var corrupted_gem_data = Shared.data_corrupted[current_color]
-			var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
-			add_child(corrupted_gem)
-			var random_r = randi_range(0, max_row_spawn)
-			var random_c = randi_range(0, max_col_spawn)
-			var loops = 0
-			while grid[random_r][random_c] != null and loops < 100:
-				random_r = randi_range(0, max_row_spawn)
-				random_c = randi_range(0, max_col_spawn)
-				loops += 1
-			loops = 0
-			while check_for_spawn_clears(current_color, random_r, random_c) and loops < 100:
-				print(current_color, random_r, random_c)
-				random_r = randi_range(0, max_row_spawn)
-				random_c = randi_range(0, max_col_spawn)
-				loops += 1
-			corrupted_gem.global_position = grid_to_position(random_r, random_c)
-			corrupted_gem.gem_position = grid_to_position(random_r, random_c)
-			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
-			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
-			grid[random_r][random_c] = corrupted_gem
+#	for color in Shared.Gem_color:
+#		for i in range(corrupted_count + current_level):
+#			var current_color = Shared.Gem_color[color]
+#			corrupted_count_keeper[current_color] += 1
+#			var corrupted_gem_data = Shared.data_corrupted[current_color]
+#			var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
+#			add_child(corrupted_gem)
+#			var random_r = randi_range(0, max_row_spawn)
+#			var random_c = randi_range(0, max_col_spawn)
+#			var loops = 0
+#			while grid[random_r][random_c] != null and loops < 100:
+#				random_r = randi_range(0, max_row_spawn)
+#				random_c = randi_range(0, max_col_spawn)
+#				loops += 1
+#			loops = 0
+#			while check_for_spawn_clears(current_color, random_r, random_c) and loops < 100:
+#				current_color = Shared.Gem_color.values().pick_random()
+#				corrupted_gem_data = Shared.data_corrupted[current_color]
+#				loops += 1
+#			corrupted_gem.global_position = grid_to_position(random_r, random_c)
+#			corrupted_gem.gem_position = grid_to_position(random_r, random_c)
+#			corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
+#			corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
+#			grid[random_r][random_c] = corrupted_gem
 	
 	#spawning 1 virus
-#	corrupted_count_keeper[Shared.Gem_color.RED] += 1
-#	var corrupted_gem_data = Shared.data_corrupted[Shared.Gem_color.RED]
-#	var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
-#	add_child(corrupted_gem)
-#	var random_r = 4
-#	var random_c = 4
-#	corrupted_gem.global_position = grid_to_position(random_r, random_c)
-#	corrupted_gem.gem_position = grid_to_position(random_r, random_c)
-#	corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
-#	corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
-#	grid[random_r][random_c] = corrupted_gem
+	corrupted_count_keeper[Shared.Gem_color.RED] += 1
+	var corrupted_gem_data = Shared.data_corrupted[Shared.Gem_color.RED]
+	var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
+	add_child(corrupted_gem)
+	var random_r = 4
+	var random_c = 4
+	corrupted_gem.global_position = grid_to_position(random_r, random_c)
+	corrupted_gem.gem_position = grid_to_position(random_r, random_c)
+	corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
+	corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
+	grid[random_r][random_c] = corrupted_gem
 
 	info_display.update_counts(corrupted_count_keeper)
 
@@ -161,7 +168,6 @@ func on_gem_locked(gem_container: GemContainer) -> void:
 		else:
 			gem.queue_free()
 	gem_container.queue_free()
-#	print_grid()
 	check_for_matches()
 
 
@@ -197,18 +203,55 @@ func check_for_matches() -> void:
 								match_and_dim(grid[r + i][c])
 								current_matches.append(grid[r + i][c])
 	if found_matches:
+		found_matches = false
 		destroy_timer.start()
 	else:
 		if check_for_lose():
 			game_over.emit()
 		else:
-			gem_locked.emit()
+			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
+				gem_locked.emit()
+			else:
+				if wave_cleared:
+					spawn_next_wave()
+				else:
+					gem_locked.emit()
 
 
 func check_for_lose() -> bool:
 	if grid[ROWS - 1][COLUMNS/2 - 1] != null or grid[ROWS - 1][COLUMNS/2] != null:
 		return true
 	return false
+
+
+func spawn_next_wave():
+	wave_cleared = false
+	current_wave += 1
+	for i in range(endless_corrupted_count + current_wave):
+		var current_color = Shared.Gem_color.values().pick_random()
+		var corrupted_gem_data = Shared.data_corrupted[current_color]
+		var corrupted_gem = corrupted_gem_scene.instantiate() as CorruptedGem
+		add_child(corrupted_gem)
+		var random_r = randi_range(0, max_row_spawn)
+		var random_c = randi_range(0, max_col_spawn)
+		var loops = 0
+		while grid[random_r][random_c] != null and loops < 100:
+			random_r = randi_range(0, max_row_spawn)
+			random_c = randi_range(0, max_col_spawn)
+			loops += 1
+		loops = 0
+		while check_for_spawn_clears(current_color, random_r, random_c) and loops < 100:
+			current_color = Shared.Gem_color.values().pick_random()
+			corrupted_gem_data = Shared.data_corrupted[current_color]
+			loops += 1
+		corrupted_count_keeper[current_color] += 1
+		corrupted_gem.global_position = grid_to_position(random_r, random_c)
+		corrupted_gem.gem_position = grid_to_position(random_r, random_c)
+		corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
+		corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
+		grid[random_r][random_c] = corrupted_gem
+		#TODO
+		#continue to the next wave
 
 
 func match_and_dim(gem) -> void:
@@ -232,7 +275,11 @@ func destroy_matched() -> void:
 	current_matches.clear()
 
 	if check_level_clear():
-		level_cleared.emit()
+		if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
+			level_cleared.emit()
+		else:
+			wave_cleared = true
+			fall_timer.start()
 	else:
 		fall_timer.start()
 
@@ -253,11 +300,13 @@ func next_level() -> void:
 
 
 func make_gems_fall() -> void:
+	var falling_gems: bool = false
 	for r in ROWS:
 		for c in COLUMNS:
 			if grid[r][c] != null and grid[r][c] is Gem and grid[r][c].can_fall:
 				var current_row = r
 				while current_row > 0 and grid[current_row-1][c] == null:
+					falling_gems = true
 					grid[current_row][c].move(grid_to_position(current_row - 1, c))
 					grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
 					grid[current_row - 1][c] = grid[current_row][c]
@@ -268,6 +317,7 @@ func make_gems_fall() -> void:
 				var current_row = r
 				if c < COLUMNS - 1 and paired_gem == grid[r][c + 1]:
 					while current_row > 0 and grid[current_row - 1][c] == null and grid[current_row - 1][c + 1] == null:
+						falling_gems = true
 						grid[current_row][c].move(grid_to_position(current_row - 1, c))
 						grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
 						grid[current_row - 1][c] = grid[current_row][c]
@@ -279,6 +329,7 @@ func make_gems_fall() -> void:
 						current_row -= 1
 				elif r < ROWS - 1 and paired_gem == grid[r + 1][c]:
 					while current_row > 0 and grid[current_row - 1][c] == null:
+						falling_gems = true
 						grid[current_row][c].move(grid_to_position(current_row - 1, c))
 						grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
 						grid[current_row - 1][c] = grid[current_row][c]
@@ -289,8 +340,10 @@ func make_gems_fall() -> void:
 						grid[current_row + 1][c] = null
 						current_row -= 1
 	found_matches = false
-	check_for_matches()
-#	print_grid()
+	if falling_gems:
+		fall_delay.start()
+	else:
+		check_for_matches()
 
 
 func retry_level() -> void:
@@ -348,3 +401,7 @@ func _on_destroy_timer_timeout() -> void:
 
 func _on_fall_timer_timeout() -> void:
 	make_gems_fall()
+
+
+func _on_fall_delay_timeout() -> void:
+	check_for_matches()

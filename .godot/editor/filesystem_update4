@@ -1,9 +1,12 @@
-res://Scripts/gem_container.gd
-res://Scenes/gem_container.tscn
 res://Scenes/main.tscn
 res://Scenes/info_display.tscn
 res://Scenes/win_menu.tscn
 res://Scenes/main_menu.tscn
 res://Scenes/level_transition.tscn
+res://Scenes/gem_container.tscn
 res://Scenes/gem.tscn
+res://Scripts/gem_container.gd
+res://Scripts/shared.gd
+res://Scripts/grid.gd
+res://Scripts/main_menu.gd
 res://Scripts/gem.gd

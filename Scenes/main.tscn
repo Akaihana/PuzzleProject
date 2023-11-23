@@ -87,6 +87,7 @@ script = ExtResource("1_8qrqb")
 gem_container_scene = ExtResource("2_rldxo")
 corrupted_gem_scene = ExtResource("3_dxh0i")
 corrupted_count = 1
+endless_corrupted_count = 4
 max_row_spawn = 14
 max_col_spawn = 9
 
@@ -111,6 +112,10 @@ one_shot = true
 
 [node name="FallTimer" type="Timer" parent="Grid"]
 wait_time = 0.5
+one_shot = true
+
+[node name="FallDelay" type="Timer" parent="Grid"]
+wait_time = 0.1
 one_shot = true
 
 [node name="LoseZone" type="Sprite2D" parent="Grid"]
@@ -149,3 +154,4 @@ position = Vector2(224, 482.5)
 
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]
+[connection signal="timeout" from="Grid/FallDelay" to="Grid" method="_on_fall_delay_timeout"]
