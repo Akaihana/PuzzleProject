@@ -115,7 +115,11 @@ wait_time = 0.5
 one_shot = true
 
 [node name="FallDelay" type="Timer" parent="Grid"]
-wait_time = 0.1
+wait_time = 0.5
+one_shot = true
+
+[node name="WaveDelay" type="Timer" parent="Grid"]
+wait_time = 0.5
 one_shot = true
 
 [node name="LoseZone" type="Sprite2D" parent="Grid"]
@@ -155,3 +159,4 @@ position = Vector2(224, 482.5)
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]
 [connection signal="timeout" from="Grid/FallDelay" to="Grid" method="_on_fall_delay_timeout"]
+[connection signal="timeout" from="Grid/WaveDelay" to="Grid" method="_on_wave_delay_timeout"]
