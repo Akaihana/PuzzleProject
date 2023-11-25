@@ -34,6 +34,7 @@ var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 @onready var info_display: Panel = $InfoDisplay
 @onready var ready_screen: ColorRect = $"../CanvasLayer/ReadyScreen"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var timer_component: Node2D = $"../TimerComponent"
 
 
 func _ready() -> void:
@@ -41,6 +42,7 @@ func _ready() -> void:
 	if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
 		info_display.update_level(current_level)
 		start_level()
+		timer_component.queue_free()
 	else:
 		info_display.update_level(current_wave)
 		start_wave()
@@ -54,6 +56,8 @@ func _ready() -> void:
 	Shared.is_paused = false
 	ready_screen.visible = false
 	spawn_gem_container()
+	if timer_component != null:
+		timer_component.start_level_msec = Time.get_ticks_msec()
 
 
 func set_next_gem_colors():

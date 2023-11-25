@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d0lcwhpadgq44"]
+[gd_scene load_steps=18 format=3 uid="uid://d0lcwhpadgq44"]
 
 [ext_resource type="Script" path="res://Scripts/grid.gd" id="1_8qrqb"]
 [ext_resource type="PackedScene" uid="uid://dy4e4velmavcu" path="res://Scenes/pause_menu.tscn" id="1_rayih"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scripts/ready_screen.gd" id="5_mlb83"]
 [ext_resource type="Texture2D" uid="uid://7hhpigcjv3jt" path="res://Assets/Sprites/Viruses/tileGrey_39.png" id="6_ckbq1"]
 [ext_resource type="PackedScene" uid="uid://b6eaxj1uraiv0" path="res://Scenes/info_display.tscn" id="9_danry"]
+[ext_resource type="Script" path="res://Scripts/timer_component.gd" id="14_i1moe"]
 
 [sub_resource type="Animation" id="Animation_0l60j"]
 length = 0.001
@@ -153,8 +154,8 @@ script = ExtResource("2_jqgu4")
 [node name="CorruptedGemSpawner" type="Node2D" parent="."]
 script = ExtResource("5_fntxq")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(224, 482.5)
+[node name="TimerComponent" type="Node2D" parent="."]
+script = ExtResource("14_i1moe")
 
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]

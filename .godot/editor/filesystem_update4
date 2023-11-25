@@ -1,11 +1,8 @@
 res://Scenes/main.tscn
-res://Scripts/grid.gd
 res://Scenes/info_display.tscn
 res://Scenes/win_menu.tscn
 res://Scenes/main_menu.tscn
 res://Scenes/level_transition.tscn
 res://Scenes/gem_container.tscn
 res://Scenes/gem.tscn
-res://Scripts/info_display.gd
 res://Scenes/lose_menu.tscn
-res://Scripts/lose_menu.gd
