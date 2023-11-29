@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1701206172
+::res://::1701251313
 export_presets.cfg::TextFile::-1::1700651576::0::1::::<><>::
 ::res://Assets/::1699955878
 ::res://Assets/Icons/::1699955878
@@ -44,14 +44,14 @@ gem_blue_data.tres::Resource::7061154855367344105::1699832552::0::1::::<><>::uid
 gem_green_data.tres::Resource::7287481862487831819::1699832552::0::1::::<><>::uid://g76qul74kve
 gem_red_data.tres::Resource::5266444309319367137::1699832552::0::1::::<><>::uid://cx05cwb0bkn61
 gem_yellow_data.tres::Resource::6383604866169318998::1699832552::0::1::::<><>::uid://bo6rd8f6n48or
-::res://Scenes/::1700911616
+::res://Scenes/::1701206243
 corrupted_gem.tscn::PackedScene::7948280457685747041::1700001689::0::1::::<><>::uid://cthkdig4r0xki
-gem.tscn::PackedScene::8012512540915201998::1700911616::0::1::::<><>::res://Scripts/gem.gd<>uid://cx05cwb0bkn61::::res://Assets/Sprites/Gems/tileRed_39.png
+gem.tscn::PackedScene::8012512540915201998::1700911616::0::1::::<><>::res://Scripts/gem.gd<>uid://cx05cwb0bkn61
 gem_container.tscn::PackedScene::6606895935603741457::1700911616::0::1::::<><>::res://Scripts/gem_container.gd
-info_display.tscn::PackedScene::4570573934554658963::1700911616::0::1::::<><>::res://Scripts/info_display.gd<>uid://cx05cwb0bkn61::::res://Assets/Sprites/Gems/tileRed_39.png<>uid://6pxkrf36hklp::::res://Assets/Sprites/Viruses/tileRed_48.png<>uid://du4le6qwosv3::::res://Assets/Sprites/Viruses/tileGreen_44.png<>uid://badjsqbg8vnrm::::res://Assets/Sprites/Viruses/tileBlue_46.png<>uid://dgyxa643sc3vu::::res://Assets/Sprites/Viruses/tileYellow_45.png
+info_display.tscn::PackedScene::4570573934554658963::1700911616::0::1::::<><>::res://Scripts/info_display.gd<>uid://cx05cwb0bkn61
 level_transition.tscn::PackedScene::6625182813142379753::1700911616::0::1::::<><>::res://Scripts/level_transition.gd
 lose_menu.tscn::PackedScene::3624503208789372023::1700911616::0::1::::<><>::res://Scripts/lose_menu.gd
-main.tscn::PackedScene::8936852409615992535::1700911616::0::1::::<><>::res://Scripts/grid.gd<>uid://dy4e4velmavcu::::res://Scenes/pause_menu.tscn<>res://Scripts/gem_spawner.gd<>uid://brv0bkjovmxg6::::res://Scenes/lose_menu.tscn<>uid://c1eou1cdb7ov6::::res://Scenes/gem_container.tscn<>uid://dlihauw0nhjtp::::res://Scenes/corrupted_gem.tscn<>uid://bhofl6nsn4b45::::res://Scenes/win_menu.tscn<>uid://cifupq4npmacr::::res://Assets/Sprites/Grid/tileBlack_27.png<>uid://d7s8djqmtmpb::::res://Scenes/ready_screen.tscn<>res://Scripts/corrupted_gem_spawner.gd<>res://Scripts/ready_screen.gd<>uid://7hhpigcjv3jt::::res://Assets/Sprites/Viruses/tileGrey_39.png<>uid://b6eaxj1uraiv0::::res://Scenes/info_display.tscn<>res://Scripts/timer_component.gd
+main.tscn::PackedScene::8936852409615992535::1701206243::0::1::::<><>::res://Scripts/grid.gd<>uid://dy4e4velmavcu::::res://Scenes/pause_menu.tscn<>res://Scripts/gem_spawner.gd<>uid://brv0bkjovmxg6::::res://Scenes/lose_menu.tscn<>uid://c1eou1cdb7ov6::::res://Scenes/gem_container.tscn<>uid://dlihauw0nhjtp::::res://Scenes/corrupted_gem.tscn<>uid://bhofl6nsn4b45::::res://Scenes/win_menu.tscn<>uid://cifupq4npmacr::::res://Assets/Sprites/Grid/tileBlack_27.png<>uid://d7s8djqmtmpb::::res://Scenes/ready_screen.tscn<>res://Scripts/corrupted_gem_spawner.gd<>res://Scripts/ready_screen.gd<>uid://7hhpigcjv3jt::::res://Assets/Sprites/Viruses/tileGrey_39.png<>uid://b6eaxj1uraiv0::::res://Scenes/info_display.tscn<>res://Scripts/timer_component.gd
 main_menu.tscn::PackedScene::2977299002885542495::1700911616::0::1::::<><>::res://Scripts/main_menu.gd
 pause_menu.tscn::PackedScene::8903957018939542476::1700221662::0::1::::<><>::res://Scripts/pause_menu.gd
 ready_screen.tscn::PackedScene::277778628329722055::1700216587::0::1::::<><>::

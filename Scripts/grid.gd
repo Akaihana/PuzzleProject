@@ -10,6 +10,7 @@ signal level_cleared
 
 @export var gem_container_scene: PackedScene
 @export var corrupted_gem_scene: PackedScene
+@export var chain_text_scene: PackedScene
 @export var current_level: int = 1
 @export var corrupted_count: int
 @export var endless_corrupted_count: int
@@ -17,6 +18,7 @@ signal level_cleared
 @export var max_col_spawn: int
 
 var current_wave: int = 1
+var current_chain: int = 1
 var grid_slot_radius: float = 27.0
 var found_matches: bool
 var wave_cleared: bool
@@ -42,7 +44,8 @@ func _ready() -> void:
 	if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
 		info_display.update_level(current_level)
 		start_level()
-		timer_component.queue_free()
+		if timer_component != null:
+			timer_component.queue_free()
 	else:
 		info_display.update_level(current_wave)
 		start_wave()
@@ -202,6 +205,7 @@ func grid_to_position(r: int, c:int) -> Vector2:
 
 
 func check_for_matches() -> void:
+	var spawned_chain_text: bool = false
 	for r in ROWS:
 		for c in COLUMNS:
 			if grid[r][c] != null:
@@ -210,6 +214,9 @@ func check_for_matches() -> void:
 					if grid[r][c + 1] != null and grid[r][c + 2] != null and grid[r][c + 3] != null:
 						if grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color and grid[r][c + 3].gem_color == current_color:
 							found_matches = true
+							if current_chain > 1 and not spawned_chain_text:
+								spawn_chain_text(grid_to_position(r, c))
+								spawned_chain_text = true
 							for i in range(4):
 								match_and_dim(grid[r][c + i])
 								current_matches.append(grid[r][c + i])
@@ -217,13 +224,18 @@ func check_for_matches() -> void:
 					if grid[r + 1][c] != null and grid[r + 2][c] != null and grid[r + 3][c] != null:
 						if grid[r + 1][c].gem_color == current_color and grid[r + 2][c].gem_color == current_color and grid[r + 3][c].gem_color == current_color:
 							found_matches = true
+							if current_chain > 1 and not spawned_chain_text:
+								spawn_chain_text(grid_to_position(r, c))
+								spawned_chain_text = true
 							for i in range(4):
 								match_and_dim(grid[r + i][c])
 								current_matches.append(grid[r + i][c])
 	if found_matches:
+		current_chain += 1
 		found_matches = false
 		destroy_timer.start()
 	else:
+		current_chain = 1
 		if check_for_lose():
 			game_over.emit()
 		else:
@@ -234,6 +246,13 @@ func check_for_matches() -> void:
 					spawn_next_wave()
 				else:
 					gem_locked.emit()
+
+
+func spawn_chain_text(position: Vector2) -> void:
+	var chain_text = chain_text_scene.instantiate() as ChainText
+	add_child(chain_text)
+	chain_text.global_position = position
+	chain_text.set_text(current_chain)
 
 
 func check_for_lose() -> bool:
@@ -300,7 +319,7 @@ func make_gems_fall() -> void:
 		for c in COLUMNS:
 			if grid[r][c] != null and grid[r][c] is Gem and grid[r][c].can_fall:
 				var current_row = r
-				while current_row > 0 and grid[current_row-1][c] == null:
+				if current_row > 0 and grid[current_row-1][c] == null:
 					falling_gems = true
 					grid[current_row][c].move(grid_to_position(current_row - 1, c))
 					grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
@@ -311,7 +330,7 @@ func make_gems_fall() -> void:
 				var paired_gem = grid[r][c].paired_gem
 				var current_row = r
 				if c < COLUMNS - 1 and paired_gem == grid[r][c + 1]:
-					while current_row > 0 and grid[current_row - 1][c] == null and grid[current_row - 1][c + 1] == null:
+					if current_row > 0 and grid[current_row - 1][c] == null and grid[current_row - 1][c + 1] == null:
 						falling_gems = true
 						grid[current_row][c].move(grid_to_position(current_row - 1, c))
 						grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
@@ -323,7 +342,7 @@ func make_gems_fall() -> void:
 						grid[current_row][c + 1] = null
 						current_row -= 1
 				elif r < ROWS - 1 and paired_gem == grid[r + 1][c]:
-					while current_row > 0 and grid[current_row - 1][c] == null:
+					if current_row > 0 and grid[current_row - 1][c] == null:
 						falling_gems = true
 						grid[current_row][c].move(grid_to_position(current_row - 1, c))
 						grid[current_row][c].gem_position = grid_to_position(current_row - 1, c)
@@ -335,6 +354,7 @@ func make_gems_fall() -> void:
 						grid[current_row + 1][c] = null
 						current_row -= 1
 	found_matches = false
+	
 	if falling_gems:
 		fall_delay.start()
 	else:
@@ -409,7 +429,6 @@ func test_spawn() -> void:
 	grid[random_r][random_c] = corrupted_gem
 
 
-
 func _on_destroy_timer_timeout() -> void:
 	destroy_matched()
 
@@ -419,7 +438,8 @@ func _on_fall_timer_timeout() -> void:
 
 
 func _on_fall_delay_timeout() -> void:
-	check_for_matches()
+#	check_for_matches()
+	make_gems_fall()
 
 
 func _on_wave_delay_timeout() -> void:

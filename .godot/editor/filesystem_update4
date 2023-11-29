@@ -1,1 +1,12 @@
 res://Scenes/main.tscn
+res://Scenes/info_display.tscn
+res://Scenes/win_menu.tscn
+res://Scenes/main_menu.tscn
+res://Scenes/level_transition.tscn
+res://Scenes/gem_container.tscn
+res://Scenes/gem.tscn
+res://Scenes/lose_menu.tscn
+res://Scripts/grid.gd
+res://Scripts/gem.gd
+res://Scenes/chain_text.tscn
+res://Scripts/chain_text.gd

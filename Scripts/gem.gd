@@ -33,4 +33,4 @@ func dim() -> void:
 
 func move(target: Vector2) -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(self, "global_position", target, fall_time)
+	tween.tween_property(self, "global_position", target, fall_time).set_trans(Tween.TRANS_ELASTIC)

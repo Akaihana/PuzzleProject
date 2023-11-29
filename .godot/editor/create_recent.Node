@@ -1,3 +1,4 @@
+AnimationPlayer
 Label
 Panel
 VBoxContainer
@@ -7,7 +8,6 @@ Node2D
 Timer
 Marker2D
 CanvasLayer
-AnimationPlayer
 CenterContainer
 ColorRect
 TextureRect
