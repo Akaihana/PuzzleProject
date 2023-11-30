@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d8qgb6t18v13"]
+
+[ext_resource type="Texture2D" uid="uid://bimf3khb0f74v" path="res://Assets/Sprites/Characters/Mokou.png" id="1_bxm34"]
+
+[node name="CharacterOne" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bxm34")

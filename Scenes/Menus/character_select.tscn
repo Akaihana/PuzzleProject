@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://16ww37klnubh"]
+
+[ext_resource type="Script" path="res://Scripts/character_select.gd" id="1_ltvgk"]
+
+[node name="CharacterSelect" type="CanvasLayer"]
+script = ExtResource("1_ltvgk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="CharacterButton1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Character 1
+"
+
+[node name="CharacterButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Character 2"
+
+[node name="CharacterButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Character 3"
+
+[node name="CharacterButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Character 4"
+
+[node name="CharacterButton5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Character 5"
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CharacterButton1" to="." method="_on_character_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CharacterButton2" to="." method="_on_character_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CharacterButton3" to="." method="_on_character_button_3_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CharacterButton4" to="." method="_on_character_button_4_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CharacterButton5" to="." method="_on_character_button_5_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

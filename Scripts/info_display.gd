@@ -14,6 +14,9 @@ extends Panel
 @onready var timer_panel: Panel = $TimerPanel
 @onready var timer_display: Label = %TimerDisplay
 
+@onready var character_location: Marker2D = %CharacterLocation
+
+
 func _ready() -> void:
 	if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
 		mode_display.text = "Mode:\nClassic"
@@ -22,6 +25,11 @@ func _ready() -> void:
 		mode_display.text = "Mode:\nOutbreak"
 		level_display.text = "Wave: 1" 
 		timer_panel.visible = true
+	
+	print(Shared.current_character as Shared.Characters)
+	var character = Shared.characters[Shared.current_character as Shared.Characters].instantiate()
+	add_child(character)
+	character.global_position = character_location.global_position
 
 
 func update_next_gem(gem_colors: Array) -> void:

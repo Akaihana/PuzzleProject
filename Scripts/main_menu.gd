@@ -3,27 +3,30 @@ extends CenterContainer
 @onready var arcade_mode_button: Button = %ArcadeModeButton
 
 
+
 func _ready() -> void:
+	get_tree().get_root().set_disable_input(false)
 	arcade_mode_button.grab_focus()
 
 
 func _on_arcade_mode_button_pressed() -> void:
 	Shared.current_game_mode = Shared.Game_modes.CLASSIC
-	load_main_scene()
+	load_characte_select_scene()
 
 
 func _on_outbreak_mode_button_pressed() -> void:
 	Shared.current_game_mode = Shared.Game_modes.ENDLESS
-	load_main_scene()
+	load_characte_select_scene()
 
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 
-func load_main_scene() -> void:
-	await LevelTransition.fade_to_black()
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
-	LevelTransition.fade_from_black()
+func load_characte_select_scene() -> void:
+	get_tree().get_root().set_disable_input(true)
+	get_tree().change_scene_to_file("res://Scenes/Menus/character_select.tscn")
+	
+
 
 
