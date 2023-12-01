@@ -26,8 +26,11 @@ var data_corrupted: Dictionary = {
 }
 
 var characters: Dictionary = {
-	Characters.IRYS: preload("res://Scenes/Characters/character_one.tscn"),
-	Characters.FAUNA: preload("res://Scenes/Characters/character_two.tscn")
+	Characters.IRYS: preload("res://Scenes/Characters/character_irys.tscn"),
+	Characters.FAUNA: preload("res://Scenes/Characters/character_fuana.tscn"),
+	Characters.KRONII: preload("res://Scenes/Characters/character_kronii.tscn"),
+	Characters.MUMEI: preload("res://Scenes/Characters/character_mumei.tscn"),
+	Characters.BAELZ: preload("res://Scenes/Characters/character_baelz.tscn")
 }
 
 var clockwise_rotation_matrix: Array[Vector2] = [Vector2(0, -1), Vector2(1, 0)]

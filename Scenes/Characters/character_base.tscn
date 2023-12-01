@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://fif8a6ixo5aa"]
+
+[ext_resource type="Script" path="res://Scripts/Component Scripts/character_controller_component.gd" id="1_o8cmt"]
+
+[node name="CharacterBase" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CharacterControllerComponent" type="Node" parent="."]
+script = ExtResource("1_o8cmt")

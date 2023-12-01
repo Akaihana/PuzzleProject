@@ -26,24 +26,24 @@ size_flags_vertical = 0
 [node name="CharacterButton1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Character 1
+text = "IRyS
 "
 
 [node name="CharacterButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Character 2"
+text = "Fauna"
 
 [node name="CharacterButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Character 3"
+text = "Kronii"
 
 [node name="CharacterButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Character 4"
+text = "Mumei"
 
 [node name="CharacterButton5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Character 5"
+text = "Baelz"
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

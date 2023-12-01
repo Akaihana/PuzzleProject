@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5ybl0owl7cwb"
-path="res://.godot/imported/Yuka.png-64bf7219a6ca8aa1aa4c3fdc8aba2b46.ctex"
+uid="uid://cabpgk7shd52h"
+path="res://.godot/imported/Tenshi.png-9ea5957f8817ebec116430647d71dd78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Yuka.png"
-dest_files=["res://.godot/imported/Yuka.png-64bf7219a6ca8aa1aa4c3fdc8aba2b46.ctex"]
+source_file="res://Assets/Sprites/Characters/Touhou Sprites/Tenshi.png"
+dest_files=["res://.godot/imported/Tenshi.png-9ea5957f8817ebec116430647d71dd78.ctex"]
 
 [params]
 

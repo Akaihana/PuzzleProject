@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca7imn88vy73u"]
+
+[ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_okvjp"]
+[ext_resource type="Texture2D" uid="uid://bhfp6b03a080k" path="res://Assets/Sprites/Characters/Ouro_Kronii_IdleAnim.png" id="2_grfcb"]
+
+[node name="CharacterKronii" instance=ExtResource("1_okvjp")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_grfcb")

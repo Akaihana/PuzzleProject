@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dllf1pcj5wdq5"
-path="res://.godot/imported/Reimu.png-f81e53500765fe7b431173db1944f4d7.ctex"
+uid="uid://yvwhrcqa11df"
+path="res://.godot/imported/Nanashi_Mumei_IdleAnim.png-42f54a714cae0800a464547bf46af08a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Reimu.png"
-dest_files=["res://.godot/imported/Reimu.png-f81e53500765fe7b431173db1944f4d7.ctex"]
+source_file="res://Assets/Sprites/Characters/Nanashi_Mumei_IdleAnim.png"
+dest_files=["res://.godot/imported/Nanashi_Mumei_IdleAnim.png-42f54a714cae0800a464547bf46af08a.ctex"]
 
 [params]
 

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgucl4go124ej"]
+
+[ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_52n8j"]
+[ext_resource type="Texture2D" uid="uid://cnjyuvv7n6f82" path="res://Assets/Sprites/Characters/Hakos_Baelz_IdleAnim.png" id="2_jbcey"]
+
+[node name="CharacterBaelz" instance=ExtResource("1_52n8j")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_jbcey")

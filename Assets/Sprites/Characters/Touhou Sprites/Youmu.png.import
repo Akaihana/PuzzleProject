@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://detihc4acngf3"
-path="res://.godot/imported/Youmu.png-ec52e43ab56d21e6bbbd38337500a33e.ctex"
+path="res://.godot/imported/Youmu.png-c73ac01fd3596dca5194383ab6cb3aed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Youmu.png"
-dest_files=["res://.godot/imported/Youmu.png-ec52e43ab56d21e6bbbd38337500a33e.ctex"]
+source_file="res://Assets/Sprites/Characters/Touhou Sprites/Youmu.png"
+dest_files=["res://.godot/imported/Youmu.png-c73ac01fd3596dca5194383ab6cb3aed.ctex"]
 
 [params]
 
