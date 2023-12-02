@@ -7,6 +7,7 @@ var grid_r: int
 var grid_c: int
 var can_fall: bool
 var matched: bool
+var checked: bool
 var gem_color: Shared.Gem_color
 var gem_position: Vector2
 var paired_gem: Gem

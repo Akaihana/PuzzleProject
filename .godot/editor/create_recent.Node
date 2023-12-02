@@ -1,3 +1,4 @@
+CheckButton
 Node
 Sprite2D
 Marker2D
@@ -12,4 +13,3 @@ HBoxContainer
 CanvasLayer
 AnimationPlayer
 Label
-Node2D

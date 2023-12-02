@@ -4,6 +4,7 @@ extends Area2D
 var grid_r: int
 var grid_c: int
 var matched: bool
+var checked: bool
 var gem_color: Shared.Gem_color
 var gem_position: Vector2
 

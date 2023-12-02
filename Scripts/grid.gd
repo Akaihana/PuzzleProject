@@ -189,7 +189,10 @@ func on_gem_locked(gem_container: GemContainer) -> void:
 		else:
 			gem.queue_free()
 	gem_container.queue_free()
-	check_for_matches()
+	if Shared.is_flood_fill_mode:
+		check_for_matches_flood()
+	else:
+		check_for_matches()
 
 
 func position_to_grid(gem_position: Vector2) -> Vector2:
@@ -248,10 +251,70 @@ func check_for_matches() -> void:
 					gem_locked.emit()
 
 
-func spawn_chain_text(position: Vector2) -> void:
+func check_for_matches_flood() -> void:
+	var spawned_chain_text: bool = false
+	for r in ROWS:
+		for c in COLUMNS:
+			if grid[r][c] != null and not grid[r][c].checked:
+				var current_color = grid[r][c].gem_color
+				var num_matched: int = flood_fill(r, c, current_color)
+				if num_matched >= 4:
+					if current_chain > 1 and not spawned_chain_text:
+								spawn_chain_text(grid_to_position(r, c))
+								spawned_chain_text = true
+					found_matches = true
+					flood_fill_match(r, c, current_color)
+	reset_checked()
+	
+	if found_matches:
+		current_chain += 1
+		found_matches = false
+		destroy_timer.start()
+	else:
+		current_chain = 1
+		if check_for_lose():
+			game_over.emit()
+		else:
+			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
+				gem_locked.emit()
+			else:
+				if wave_cleared:
+					spawn_next_wave()
+				else:
+					gem_locked.emit()
+
+
+func flood_fill(r: int, c:int, color: Shared.Gem_color) -> int:
+	if r >= 0 and r < ROWS and c >= 0 and c < COLUMNS:
+		if grid[r][c] != null:
+			if not grid[r][c].checked and grid[r][c].gem_color == color:
+				grid[r][c].checked = true
+				return 1 + flood_fill(r + 1, c, color) + flood_fill(r - 1, c, color) + flood_fill(r, c + 1, color) + flood_fill(r, c - 1, color)
+	return 0
+
+
+func flood_fill_match(r: int, c:int, color: Shared.Gem_color):
+	if r >= 0 and r < ROWS and c >= 0 and c < COLUMNS:
+		if grid[r][c] != null:
+			if not grid[r][c].matched and grid[r][c].gem_color == color:
+				match_and_dim(grid[r][c])
+				flood_fill_match(r + 1, c, color)
+				flood_fill_match(r - 1, c, color)
+				flood_fill_match(r, c + 1, color)
+				flood_fill_match(r, c - 1, color)
+
+
+func reset_checked() -> void:
+	for r in ROWS:
+		for c in COLUMNS:
+			if grid[r][c] != null:
+				grid[r][c].checked = false
+
+
+func spawn_chain_text(spawn_position: Vector2) -> void:
 	var chain_text = chain_text_scene.instantiate() as ChainText
 	add_child(chain_text)
-	chain_text.global_position = position
+	chain_text.global_position = spawn_position
 	chain_text.set_text(current_chain)
 
 
@@ -358,7 +421,10 @@ func make_gems_fall() -> void:
 	if falling_gems:
 		fall_delay.start()
 	else:
-		check_for_matches()
+		if Shared.is_flood_fill_mode:
+			check_for_matches_flood()
+		else:
+			check_for_matches()
 
 
 func retry() -> void:
@@ -438,7 +504,6 @@ func _on_fall_timer_timeout() -> void:
 
 
 func _on_fall_delay_timeout() -> void:
-#	check_for_matches()
 	make_gems_fall()
 
 

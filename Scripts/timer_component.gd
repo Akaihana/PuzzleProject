@@ -10,5 +10,5 @@ func _ready() -> void:
 	pass
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	info_display.update_timer(life_time - (Time.get_ticks_msec() - start_level_msec))

@@ -7,6 +7,7 @@ enum Characters { IRYS, FAUNA, KRONII, MUMEI, BAELZ }
 var current_game_mode: Game_modes = Game_modes.CLASSIC
 var current_character: Characters = Characters.IRYS
 var gem_size: int = 27
+var is_flood_fill_mode: bool = false
 var is_paused: bool = false
 var wall_kicks: Array[Vector2] = [Vector2(0,0), Vector2(-1,0), Vector2(1,0), Vector2(0, -1), Vector2(0, 1)]
 
