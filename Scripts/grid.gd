@@ -123,6 +123,7 @@ func start_wave() -> void:
 			random_c = randi_range(0, max_col_spawn)
 			loops += 1
 		loops = 0
+		#TODO make an alternate check for flood fill spawn clears
 		while check_for_spawn_clears(current_color, random_r, random_c) and loops < 100:
 			current_color = Shared.Gem_color.values().pick_random()
 			corrupted_gem_data = Shared.data_corrupted[current_color]
@@ -134,38 +135,6 @@ func start_wave() -> void:
 		corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 		grid[random_r][random_c] = corrupted_gem
 	info_display.update_counts(corrupted_count_keeper)
-
-
-func check_for_spawn_clears(current_color: Shared.Gem_color, r: int, c: int) -> bool:
-	#check if spawning the virus here would cause a 4 in a row at start
-	current_color = current_color as Shared.Gem_color
-	if c >= 3 and grid[r][c - 3] != null and grid[r][c - 2] != null and grid[r][c - 1] != null:
-		if grid[r][c - 3].gem_color == current_color and grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color:
-			return true
-	if c >= 2  and c < COLUMNS - 1 and grid[r][c - 2] != null and grid[r][c - 1] != null and grid[r][c + 1] != null:
-		if grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color:
-			return true
-	if c >= 1 and c < COLUMNS - 2 and grid[r][c - 1] != null and grid[r][c + 1] != null and grid[r][c + 2] != null:
-		if grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color:
-			return true
-	if c < COLUMNS - 3 and grid[r][c + 1] != null and grid[r][c + 2] != null and grid[r][c + 3] != null: 
-		if grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color and grid[r][c + 3].gem_color == current_color:
-			return true
-		
-	#check if spawning the virus here would cause a 4 in a column at start
-	if r >= 3 and grid[r - 3][c] != null and grid[r - 2][c] != null and grid[r - 1][c] != null:
-		if grid[r - 3][c].gem_color == current_color and grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color:
-			return true
-	if r >= 2 and r < ROWS - 1 and grid[r - 2][c] != null and grid[r - 1][c] != null and grid[r + 1][c] != null: 
-		if  grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color:
-			return true
-	if r >= 1 and r < ROWS - 2  and grid[r - 1][c] != null and grid[r + 1][c] != null and grid[r + 2][c] != null: 
-		if grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color and grid[r - + 2][c].gem_color == current_color:
-			return true
-	if r < ROWS - 3 and grid[r + 1][c] != null and grid[r + 2][c] != null and grid[r + 3][c] != null: 
-		if grid[r + 1][c].gem_color == current_color and grid[r + 2][c].gem_color == current_color and grid[r + 3][c].gem_color == current_color:
-			return true
-	return false
 
 
 func fill_gems_array() -> Array:
@@ -207,6 +176,7 @@ func grid_to_position(r: int, c:int) -> Vector2:
 	return Vector2(x_position, y_position)
 
 
+#region Regular Clear Code
 func check_for_matches() -> void:
 	var spawned_chain_text: bool = false
 	for r in ROWS:
@@ -233,24 +203,42 @@ func check_for_matches() -> void:
 							for i in range(4):
 								match_and_dim(grid[r + i][c])
 								current_matches.append(grid[r + i][c])
-	if found_matches:
-		current_chain += 1
-		found_matches = false
-		destroy_timer.start()
-	else:
-		current_chain = 1
-		if check_for_lose():
-			game_over.emit()
-		else:
-			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
-				gem_locked.emit()
-			else:
-				if wave_cleared:
-					spawn_next_wave()
-				else:
-					gem_locked.emit()
+	determine_next_phase()
+
+func check_for_spawn_clears(current_color: Shared.Gem_color, r: int, c: int) -> bool:
+	#check if spawning the virus here would cause a 4 in a row at start
+	current_color = current_color as Shared.Gem_color
+	if c >= 3 and grid[r][c - 3] != null and grid[r][c - 2] != null and grid[r][c - 1] != null:
+		if grid[r][c - 3].gem_color == current_color and grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color:
+			return true
+	if c >= 2  and c < COLUMNS - 1 and grid[r][c - 2] != null and grid[r][c - 1] != null and grid[r][c + 1] != null:
+		if grid[r][c - 2].gem_color == current_color and grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color:
+			return true
+	if c >= 1 and c < COLUMNS - 2 and grid[r][c - 1] != null and grid[r][c + 1] != null and grid[r][c + 2] != null:
+		if grid[r][c - 1].gem_color == current_color and grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color:
+			return true
+	if c < COLUMNS - 3 and grid[r][c + 1] != null and grid[r][c + 2] != null and grid[r][c + 3] != null: 
+		if grid[r][c + 1].gem_color == current_color and grid[r][c + 2].gem_color == current_color and grid[r][c + 3].gem_color == current_color:
+			return true
+		
+	#check if spawning the virus here would cause a 4 in a column at start
+	if r >= 3 and grid[r - 3][c] != null and grid[r - 2][c] != null and grid[r - 1][c] != null:
+		if grid[r - 3][c].gem_color == current_color and grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color:
+			return true
+	if r >= 2 and r < ROWS - 1 and grid[r - 2][c] != null and grid[r - 1][c] != null and grid[r + 1][c] != null: 
+		if  grid[r - 2][c].gem_color == current_color and grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color:
+			return true
+	if r >= 1 and r < ROWS - 2  and grid[r - 1][c] != null and grid[r + 1][c] != null and grid[r + 2][c] != null: 
+		if grid[r - 1][c].gem_color == current_color and grid[r + 1][c].gem_color == current_color and grid[r - + 2][c].gem_color == current_color:
+			return true
+	if r < ROWS - 3 and grid[r + 1][c] != null and grid[r + 2][c] != null and grid[r + 3][c] != null: 
+		if grid[r + 1][c].gem_color == current_color and grid[r + 2][c].gem_color == current_color and grid[r + 3][c].gem_color == current_color:
+			return true
+	return false
+#endregion
 
 
+#region Flood Fill Code
 func check_for_matches_flood() -> void:
 	var spawned_chain_text: bool = false
 	for r in ROWS:
@@ -265,23 +253,7 @@ func check_for_matches_flood() -> void:
 					found_matches = true
 					flood_fill_match(r, c, current_color)
 	reset_checked()
-	
-	if found_matches:
-		current_chain += 1
-		found_matches = false
-		destroy_timer.start()
-	else:
-		current_chain = 1
-		if check_for_lose():
-			game_over.emit()
-		else:
-			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
-				gem_locked.emit()
-			else:
-				if wave_cleared:
-					spawn_next_wave()
-				else:
-					gem_locked.emit()
+	determine_next_phase()
 
 
 func flood_fill(r: int, c:int, color: Shared.Gem_color) -> int:
@@ -309,6 +281,29 @@ func reset_checked() -> void:
 		for c in COLUMNS:
 			if grid[r][c] != null:
 				grid[r][c].checked = false
+
+#TODO: make a check for spawn clears for flood filling
+
+#endregion
+
+
+func determine_next_phase() -> void:
+	if found_matches:
+		current_chain += 1
+		found_matches = false
+		destroy_timer.start()
+	else:
+		current_chain = 1
+		if check_for_lose():
+			game_over.emit()
+		else:
+			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
+				gem_locked.emit()
+			else:
+				if wave_cleared:
+					spawn_next_wave()
+				else:
+					gem_locked.emit()
 
 
 func spawn_chain_text(spawn_position: Vector2) -> void:
@@ -458,6 +453,25 @@ func make_2d_array() -> Array:
 	return array
 
 
+#region Timers
+func _on_destroy_timer_timeout() -> void:
+	destroy_matched()
+
+
+func _on_fall_timer_timeout() -> void:
+	make_gems_fall()
+
+
+func _on_fall_delay_timeout() -> void:
+	make_gems_fall()
+
+
+func _on_wave_delay_timeout() -> void:
+	gem_locked.emit()
+#endregion
+
+
+#region Debug Code
 func print_grid() -> void:
 	var debug_grid_display:Array[String] = []
 	for r in grid.size():
@@ -493,19 +507,6 @@ func test_spawn() -> void:
 	corrupted_gem.set_texture(corrupted_gem_data.corrupted_gem_texture)
 	corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 	grid[random_r][random_c] = corrupted_gem
+#endregion
 
 
-func _on_destroy_timer_timeout() -> void:
-	destroy_matched()
-
-
-func _on_fall_timer_timeout() -> void:
-	make_gems_fall()
-
-
-func _on_fall_delay_timeout() -> void:
-	make_gems_fall()
-
-
-func _on_wave_delay_timeout() -> void:
-	gem_locked.emit()
