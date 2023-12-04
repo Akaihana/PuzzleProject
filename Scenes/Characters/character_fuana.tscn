@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://os50rpy65q80"]
 
 [ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_r6v61"]
-[ext_resource type="Texture2D" uid="uid://cqa1njadhgajj" path="res://Assets/Sprites/Characters/Ceres_Fauna_IdleAnim.png" id="2_0ny1f"]
 [ext_resource type="Script" path="res://Scripts/Character Scripts/character_fuana.gd" id="2_njlug"]
+[ext_resource type="Texture2D" uid="uid://tx5saynwvgyt" path="res://Assets/Sprites/Characters/Fauna.png" id="3_eexie"]
 
 [node name="CharacterFuana" instance=ExtResource("1_r6v61")]
 script = ExtResource("2_njlug")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_0ny1f")
+texture = ExtResource("3_eexie")
 
 [node name="CharacterControllerComponent" parent="." index="1" node_paths=PackedStringArray("actor")]
 actor = NodePath("..")

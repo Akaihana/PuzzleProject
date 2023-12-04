@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfn2oq3h6ji5o"
-path="res://.godot/imported/IRyS_IdleAnim.png-8cd1104b0cfe6a89926256b729f15b07.ctex"
+uid="uid://li2q2guuoitq"
+path="res://.godot/imported/IRyS.png-2289a55c5ea22b6ea14cb54b9e7ab785.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/IRyS_IdleAnim.png"
-dest_files=["res://.godot/imported/IRyS_IdleAnim.png-8cd1104b0cfe6a89926256b729f15b07.ctex"]
+source_file="res://Assets/Sprites/Characters/IRyS.png"
+dest_files=["res://.godot/imported/IRyS.png-2289a55c5ea22b6ea14cb54b9e7ab785.ctex"]
 
 [params]
 

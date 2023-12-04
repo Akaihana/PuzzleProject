@@ -71,20 +71,6 @@ visible = false
 [node name="ReadyScreen" parent="CanvasLayer" instance=ExtResource("4_rbu1x")]
 script = ExtResource("5_mlb83")
 
-[node name="TempInstructions" type="Label" parent="CanvasLayer"]
-offset_left = 776.0
-offset_top = 416.0
-offset_right = 1113.0
-offset_bottom = 624.0
-text = "Controls:
-Move: A, S, D
-Rotate: Left Arrow, Right Arrow
-Esc: Pause
-
-Instructions:
-Match 4 or more in Row or Column to clear
-Clear all unique pieces"
-
 [node name="Grid" type="Node2D" parent="."]
 position = Vector2(128, 64)
 script = ExtResource("1_8qrqb")

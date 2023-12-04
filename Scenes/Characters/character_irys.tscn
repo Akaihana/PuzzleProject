@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_g0aj3"]
 [ext_resource type="Script" path="res://Scripts/Character Scripts/character_irys.gd" id="2_o78h3"]
-[ext_resource type="Texture2D" uid="uid://cfn2oq3h6ji5o" path="res://Assets/Sprites/Characters/IRyS_IdleAnim.png" id="2_tp74k"]
+[ext_resource type="Texture2D" uid="uid://li2q2guuoitq" path="res://Assets/Sprites/Characters/IRyS.png" id="3_pekm2"]
 
 [node name="CharacterIRyS" instance=ExtResource("1_g0aj3")]
 script = ExtResource("2_o78h3")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_tp74k")
+texture = ExtResource("3_pekm2")
 
 [node name="CharacterControllerComponent" parent="." index="1" node_paths=PackedStringArray("actor")]
 actor = NodePath("..")

@@ -9,6 +9,7 @@ var bounds = {
 	"max_y": 540
 }
 
+var rotation_index: int = 0
 var grid_offset_x: float
 var grid_offset_y: float
 var is_next_gem: bool
@@ -152,11 +153,15 @@ func is_within_game_bounds(direction: Vector2, starting_global_position: Vector2
 
 
 func rotate_gems(direction: int) -> void:
+	var original_rotation_index = rotation_index
 	apply_rotation(direction)
-	test_wall_kicks()
+	rotation_index = wrap(rotation_index + direction, 0, 4)
+	if not test_wall_kicks(rotation_index, direction):
+		rotation_index = original_rotation_index
+		apply_rotation(-direction)
 
 
-func test_wall_kicks() -> bool:
+func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
 	for i in wall_kicks.size():
 		var translation = wall_kicks[i]
 		if move(translation):

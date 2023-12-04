@@ -1,11 +1,12 @@
 extends CanvasLayer
 
 @onready var arcade_mode_button: Button = %ArcadeModeButton
-
+@onready var flood_fill_mode_toggle: CheckButton = $Container/VBoxContainer/FloodFillModeToggle
 
 func _ready() -> void:
 	get_tree().get_root().set_disable_input(false)
 	arcade_mode_button.grab_focus()
+	flood_fill_mode_toggle.button_pressed = Shared.is_flood_fill_mode
 
 
 func _on_arcade_mode_button_pressed() -> void:

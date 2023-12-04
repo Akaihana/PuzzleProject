@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_okvjp"]
 [ext_resource type="Script" path="res://Scripts/Character Scripts/character_kronii.gd" id="2_61y2o"]
-[ext_resource type="Texture2D" uid="uid://bhfp6b03a080k" path="res://Assets/Sprites/Characters/Ouro_Kronii_IdleAnim.png" id="2_grfcb"]
+[ext_resource type="Texture2D" uid="uid://dd3gjwdfvix27" path="res://Assets/Sprites/Characters/Kronii.png" id="3_def8n"]
 
 [node name="CharacterKronii" instance=ExtResource("1_okvjp")]
 script = ExtResource("2_61y2o")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_grfcb")
+texture = ExtResource("3_def8n")
 
 [node name="CharacterControllerComponent" parent="." index="1" node_paths=PackedStringArray("actor")]
 actor = NodePath("..")

@@ -5,6 +5,7 @@
 [node name="CharacterBase" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 
 [node name="CharacterControllerComponent" type="Node" parent="."]
 script = ExtResource("1_o8cmt")

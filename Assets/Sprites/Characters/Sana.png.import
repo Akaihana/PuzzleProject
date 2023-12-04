@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhfp6b03a080k"
-path="res://.godot/imported/Ouro_Kronii_IdleAnim.png-956d0bb80741ad24b902c095aa625293.ctex"
+uid="uid://dghqxwje1hh16"
+path="res://.godot/imported/Sana.png-ddd3460ed8bd7317784bec3292f465a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Ouro_Kronii_IdleAnim.png"
-dest_files=["res://.godot/imported/Ouro_Kronii_IdleAnim.png-956d0bb80741ad24b902c095aa625293.ctex"]
+source_file="res://Assets/Sprites/Characters/Sana.png"
+dest_files=["res://.godot/imported/Sana.png-ddd3460ed8bd7317784bec3292f465a3.ctex"]
 
 [params]
 

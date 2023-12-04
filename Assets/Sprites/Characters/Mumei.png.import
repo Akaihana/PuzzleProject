@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqa1njadhgajj"
-path="res://.godot/imported/Ceres_Fauna_IdleAnim.png-14d00b0af0812b74c596c475e7fbe324.ctex"
+uid="uid://3gk1j8vvyhks"
+path="res://.godot/imported/Mumei.png-0f6ca90ff426a50e09f97bf11fab36b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Ceres_Fauna_IdleAnim.png"
-dest_files=["res://.godot/imported/Ceres_Fauna_IdleAnim.png-14d00b0af0812b74c596c475e7fbe324.ctex"]
+source_file="res://Assets/Sprites/Characters/Mumei.png"
+dest_files=["res://.godot/imported/Mumei.png-0f6ca90ff426a50e09f97bf11fab36b2.ctex"]
 
 [params]
 

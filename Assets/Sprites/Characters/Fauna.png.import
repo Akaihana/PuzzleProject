@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yvwhrcqa11df"
-path="res://.godot/imported/Nanashi_Mumei_IdleAnim.png-42f54a714cae0800a464547bf46af08a.ctex"
+uid="uid://tx5saynwvgyt"
+path="res://.godot/imported/Fauna.png-0c374ac8842e3ad674b0466b3ad976cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Characters/Nanashi_Mumei_IdleAnim.png"
-dest_files=["res://.godot/imported/Nanashi_Mumei_IdleAnim.png-42f54a714cae0800a464547bf46af08a.ctex"]
+source_file="res://Assets/Sprites/Characters/Fauna.png"
+dest_files=["res://.godot/imported/Fauna.png-0c374ac8842e3ad674b0466b3ad976cc.ctex"]
 
 [params]
 

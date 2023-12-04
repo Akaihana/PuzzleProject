@@ -1,26 +1,2 @@
-res://Scenes/Characters/character_base.tscn
-res://Scripts/Component Scripts/character_controller_component.gd
 res://Scenes/main.tscn
-res://Scenes/info_display.tscn
-res://Scenes/gem_container.tscn
-res://Scenes/gem.tscn
-res://Scenes/Menus/main_menu.tscn
-res://Scenes/Menus/character_select.tscn
-res://Scenes/Characters/character_irys.tscn
-res://Scripts/Character Scripts/character_irys.gd
-res://Scenes/Characters/character_fuana.tscn
-res://Scripts/Character Scripts/character_fuana.gd
-res://Scenes/Characters/character_baelz.tscn
-res://Scripts/Character Scripts/character_baelz.gd
-res://Scenes/Characters/character_kronii.tscn
-res://Scripts/Character Scripts/character_kronii.gd
-res://Scenes/Characters/character_mumei.tscn
-res://Scripts/Character Scripts/character_mumei.gd
-res://Scripts/grid.gd
-res://Scripts/gem.gd
-res://Scripts/corrupted_gem.gd
-res://Scripts/info_display.gd
-res://Scripts/chain_text.gd
-res://Scripts/timer_component.gd
-res://Scripts/shared.gd
-res://Scripts/main_menu.gd
+res://Scripts/main.gd

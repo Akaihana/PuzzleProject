@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6eaxj1uraiv0"]
+[gd_scene load_steps=8 format=3 uid="uid://b6eaxj1uraiv0"]
 
 [ext_resource type="Script" path="res://Scripts/info_display.gd" id="1_5vq2h"]
 [ext_resource type="Texture2D" uid="uid://cx05cwb0bkn61" path="res://Assets/Sprites/Gems/tileRed_39.png" id="1_6p7at"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://du4le6qwosv3" path="res://Assets/Sprites/Viruses/tileGreen_44.png" id="2_1jukm"]
 [ext_resource type="Texture2D" uid="uid://badjsqbg8vnrm" path="res://Assets/Sprites/Viruses/tileBlue_46.png" id="3_cypet"]
 [ext_resource type="Texture2D" uid="uid://dgyxa643sc3vu" path="res://Assets/Sprites/Viruses/tileYellow_45.png" id="4_mx605"]
+[ext_resource type="PackedScene" uid="uid://1b2n21o7ieft" path="res://Scenes/bar_display.tscn" id="7_s7d8c"]
 
 [node name="InfoDisplay" type="Panel"]
 custom_minimum_size = Vector2(84, 540)
@@ -214,3 +215,10 @@ grow_vertical = 2
 [node name="CharacterLocation" type="Marker2D" parent="CharacterPanel/CenterContainer"]
 unique_name_in_owner = true
 position = Vector2(44, 50)
+
+[node name="BarDisplay" parent="." instance=ExtResource("7_s7d8c")]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 520.0
+offset_right = 336.0
+offset_bottom = 540.0

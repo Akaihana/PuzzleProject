@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmoiqlyw5j4oy"]
 
 [ext_resource type="PackedScene" uid="uid://fif8a6ixo5aa" path="res://Scenes/Characters/character_base.tscn" id="1_iuj6i"]
-[ext_resource type="Texture2D" uid="uid://yvwhrcqa11df" path="res://Assets/Sprites/Characters/Nanashi_Mumei_IdleAnim.png" id="2_ivqbx"]
 [ext_resource type="Script" path="res://Scripts/Character Scripts/character_mumei.gd" id="2_x5xy0"]
+[ext_resource type="Texture2D" uid="uid://3gk1j8vvyhks" path="res://Assets/Sprites/Characters/Mumei.png" id="3_rfmf4"]
 
 [node name="CharacterMumei" instance=ExtResource("1_iuj6i")]
 script = ExtResource("2_x5xy0")
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource("2_ivqbx")
+texture = ExtResource("3_rfmf4")
 
 [node name="CharacterControllerComponent" parent="." index="1" node_paths=PackedStringArray("actor")]
 actor = NodePath("..")
