@@ -1,2 +1,6 @@
 res://Scenes/main.tscn
 res://Scripts/main.gd
+res://Scenes/info_display.tscn
+res://Scenes/bar_display.tscn
+res://Scenes/Menus/main_menu.tscn
+res://Scripts/info_display.gd

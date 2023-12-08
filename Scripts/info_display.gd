@@ -24,7 +24,7 @@ func _ready() -> void:
 	else:
 		mode_display.text = "Mode:\nOutbreak"
 		level_display.text = "Wave: 1" 
-		timer_panel.visible = true
+		#timer_panel.visible = true
 	var character = Shared.characters[Shared.current_character as Shared.Characters].instantiate()
 	add_child(character)
 	character.global_position = character_location.global_position

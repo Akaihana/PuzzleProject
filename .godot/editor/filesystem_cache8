@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1701686330
-export_presets.cfg::TextFile::-1::1700651576::0::1::::<><>::
+::res://::1701982703
+export_presets.cfg::TextFile::-1::1701687152::0::1::::<><>::
 ::res://Assets/::1699955878
 ::res://Assets/Icons/::1699955878
 icon.svg::CompressedTexture2D::3028819740940609470::1699431607::1699955878::1::::<><>::
@@ -46,7 +46,7 @@ tileRed_48.png::CompressedTexture2D::2208235069797458069::1699879291::1699879291
 tileRed_72.png::CompressedTexture2D::6121492998893597360::1699872808::1699872809::1::::<><>::
 tileYellow_45.png::CompressedTexture2D::7631338344158100926::1699879291::1699879291::1::::<><>::
 tileYellow_69.png::CompressedTexture2D::1422700456723734401::1699872808::1699872809::1::::<><>::
-::res://Exports/::1701518818
+::res://Exports/::1701687316
 ::res://Resources/::1699879320
 corrupted_gem_blue_data.tres::Resource::3515439730260722440::1699879320::0::1::::<><>::uid://badjsqbg8vnrm
 corrupted_gem_green_data.tres::Resource::2593110554130995288::1699879320::0::1::::<><>::uid://du4le6qwosv3
@@ -56,15 +56,15 @@ gem_blue_data.tres::Resource::7061154855367344105::1699832552::0::1::::<><>::uid
 gem_green_data.tres::Resource::7287481862487831819::1699832552::0::1::::<><>::uid://g76qul74kve
 gem_red_data.tres::Resource::5266444309319367137::1699832552::0::1::::<><>::uid://cx05cwb0bkn61
 gem_yellow_data.tres::Resource::6383604866169318998::1699832552::0::1::::<><>::uid://bo6rd8f6n48or
-::res://Scenes/::1701686166
-bar_display.tscn::PackedScene::1828638345442906573::1701686166::0::1::::<><>::uid://cy3ox6yv3no22::::res://Assets/Sprites/UI/grey_button07.png<>uid://pvjpd0hbnd06::::res://Assets/Sprites/UI/ProgressBack.png<>uid://bksfm8vq8xxi::::res://Assets/Sprites/UI/ProgressBorder.png<>uid://b8nvsdesofgp2::::res://Assets/Sprites/UI/ProgressBar.png
+::res://Scenes/::1701688527
+bar_display.tscn::PackedScene::1828638345442906573::1701688378::0::1::::<><>::uid://cy3ox6yv3no22::::res://Assets/Sprites/UI/grey_button07.png<>uid://pvjpd0hbnd06::::res://Assets/Sprites/UI/ProgressBack.png<>uid://bksfm8vq8xxi::::res://Assets/Sprites/UI/ProgressBorder.png<>uid://b8nvsdesofgp2::::res://Assets/Sprites/UI/ProgressBar.png
 chain_text.tscn::PackedScene::158769191974582235::1701381170::0::1::::<><>::res://Scripts/chain_text.gd
 corrupted_gem.tscn::PackedScene::7948280457685747041::1700001689::0::1::::<><>::uid://cthkdig4r0xki
 gem.tscn::PackedScene::8012512540915201998::1701599205::0::1::::<><>::res://Scripts/gem.gd<>uid://cx05cwb0bkn61::::res://Assets/Sprites/Gems/tileRed_39.png
 gem_container.tscn::PackedScene::6606895935603741457::1701599205::0::1::::<><>::res://Scripts/gem_container.gd
-info_display.tscn::PackedScene::4570573934554658963::1701686166::0::1::::<><>::res://Scripts/info_display.gd<>uid://cx05cwb0bkn61::::res://Assets/Sprites/Gems/tileRed_39.png<>uid://6pxkrf36hklp::::res://Assets/Sprites/Viruses/tileRed_48.png<>uid://du4le6qwosv3::::res://Assets/Sprites/Viruses/tileGreen_44.png<>uid://badjsqbg8vnrm::::res://Assets/Sprites/Viruses/tileBlue_46.png<>uid://dgyxa643sc3vu::::res://Assets/Sprites/Viruses/tileYellow_45.png<>uid://1b2n21o7ieft::::res://Scenes/bar_display.tscn
+info_display.tscn::PackedScene::4570573934554658963::1701688378::0::1::::<><>::res://Scripts/info_display.gd<>uid://cx05cwb0bkn61::::res://Assets/Sprites/Gems/tileRed_39.png<>uid://6pxkrf36hklp::::res://Assets/Sprites/Viruses/tileRed_48.png<>uid://du4le6qwosv3::::res://Assets/Sprites/Viruses/tileGreen_44.png<>uid://badjsqbg8vnrm::::res://Assets/Sprites/Viruses/tileBlue_46.png<>uid://dgyxa643sc3vu::::res://Assets/Sprites/Viruses/tileYellow_45.png<>uid://1b2n21o7ieft::::res://Scenes/bar_display.tscn
 level_transition.tscn::PackedScene::6625182813142379753::1701252978::0::1::::<><>::res://Scripts/level_transition.gd
-main.tscn::PackedScene::8936852409615992535::1701686166::0::1::::<><>::res://Scripts/grid.gd<>res://Scripts/main.gd<>uid://dy4e4velmavcu::::res://Scenes/Menus/pause_menu.tscn<>res://Scripts/gem_spawner.gd<>uid://brv0bkjovmxg6::::res://Scenes/Menus/lose_menu.tscn<>uid://c1eou1cdb7ov6::::res://Scenes/gem_container.tscn<>uid://dlihauw0nhjtp::::res://Scenes/corrupted_gem.tscn<>uid://bhofl6nsn4b45::::res://Scenes/Menus/win_menu.tscn<>uid://cifupq4npmacr::::res://Assets/Sprites/Grid/tileBlack_27.png<>uid://d7s8djqmtmpb::::res://Scenes/ready_screen.tscn<>res://Scripts/corrupted_gem_spawner.gd<>res://Scripts/ready_screen.gd<>uid://7hhpigcjv3jt::::res://Assets/Sprites/Viruses/tileGrey_39.png<>uid://ci551vwnygbr::::res://Scenes/chain_text.tscn<>uid://b6eaxj1uraiv0::::res://Scenes/info_display.tscn<>res://Scripts/timer_component.gd
+main.tscn::PackedScene::8936852409615992535::1701688527::0::1::::<><>::res://Scripts/grid.gd<>res://Scripts/main.gd<>uid://dy4e4velmavcu::::res://Scenes/Menus/pause_menu.tscn<>res://Scripts/gem_spawner.gd<>uid://brv0bkjovmxg6::::res://Scenes/Menus/lose_menu.tscn<>uid://c1eou1cdb7ov6::::res://Scenes/gem_container.tscn<>uid://dlihauw0nhjtp::::res://Scenes/corrupted_gem.tscn<>uid://bhofl6nsn4b45::::res://Scenes/Menus/win_menu.tscn<>uid://cifupq4npmacr::::res://Assets/Sprites/Grid/tileBlack_27.png<>uid://d7s8djqmtmpb::::res://Scenes/ready_screen.tscn<>res://Scripts/corrupted_gem_spawner.gd<>res://Scripts/ready_screen.gd<>uid://7hhpigcjv3jt::::res://Assets/Sprites/Viruses/tileGrey_39.png<>uid://ci551vwnygbr::::res://Scenes/chain_text.tscn<>uid://b6eaxj1uraiv0::::res://Scenes/info_display.tscn<>res://Scripts/timer_component.gd
 ready_screen.tscn::PackedScene::277778628329722055::1700216587::0::1::::<><>::
 ::res://Scenes/Characters/::1701599205
 character_baelz.tscn::PackedScene::2848983911438893885::1701599205::0::1::::<><>::uid://fif8a6ixo5aa::::res://Scenes/Characters/character_base.tscn<>res://Scripts/Character Scripts/character_baelz.gd<>uid://5u3lcwcb2dv1::::res://Assets/Sprites/Characters/Baelz.png
@@ -73,13 +73,13 @@ character_fuana.tscn::PackedScene::1021669682338239707::1701599205::0::1::::<><>
 character_irys.tscn::PackedScene::7134819906436483251::1701599205::0::1::::<><>::uid://fif8a6ixo5aa::::res://Scenes/Characters/character_base.tscn<>res://Scripts/Character Scripts/character_irys.gd<>uid://li2q2guuoitq::::res://Assets/Sprites/Characters/IRyS.png
 character_kronii.tscn::PackedScene::4839409356295616316::1701599205::0::1::::<><>::uid://fif8a6ixo5aa::::res://Scenes/Characters/character_base.tscn<>res://Scripts/Character Scripts/character_kronii.gd<>uid://dd3gjwdfvix27::::res://Assets/Sprites/Characters/Kronii.png
 character_mumei.tscn::PackedScene::8030944387809353424::1701599205::0::1::::<><>::uid://fif8a6ixo5aa::::res://Scenes/Characters/character_base.tscn<>res://Scripts/Character Scripts/character_mumei.gd<>uid://3gk1j8vvyhks::::res://Assets/Sprites/Characters/Mumei.png
-::res://Scenes/Menus/::1701686216
+::res://Scenes/Menus/::1701688378
 character_select.tscn::PackedScene::1890282226828598353::1701599205::0::1::::<><>::res://Scripts/character_select.gd
 lose_menu.tscn::PackedScene::3624503208789372023::1701252978::0::1::::<><>::res://Scripts/lose_menu.gd
-main_menu.tscn::PackedScene::2977299002885542495::1701686216::0::1::::<><>::res://Scripts/main_menu.gd
+main_menu.tscn::PackedScene::2977299002885542495::1701688378::0::1::::<><>::res://Scripts/main_menu.gd
 pause_menu.tscn::PackedScene::8903957018939542476::1700221662::0::1::::<><>::res://Scripts/pause_menu.gd
 win_menu.tscn::PackedScene::2906968755555614644::1701252978::0::1::::<><>::res://Scripts/win_menu.gd
-::res://Scripts/::1701686216
+::res://Scripts/::1701686916
 chain_text.gd::GDScript::-1::1701516941::0::1::::ChainText<>Node2D<>::
 character_select.gd::GDScript::-1::1701385724::0::1::::<>CanvasLayer<>::
 corrupted_gem.gd::GDScript::-1::1701516197::0::1::::CorruptedGem<>Area2D<>::
@@ -89,11 +89,11 @@ gem.gd::GDScript::-1::1701515531::0::1::::Gem<>Node2D<>::
 gem_container.gd::GDScript::-1::1701685947::0::1::::GemContainer<>Node2D<>::
 gem_data.gd::GDScript::-1::1699832525::0::1::::<>Resource<>::
 gem_spawner.gd::GDScript::-1::1700178302::0::1::::GemSpawner<>Node2D<>::
-grid.gd::GDScript::-1::1701517876::0::1::::Grid<>Node2D<>::
-info_display.gd::GDScript::-1::1701516276::0::1::::InfoDisplay<>Panel<>::
+grid.gd::GDScript::-1::1701686517::0::1::::Grid<>Node2D<>::
+info_display.gd::GDScript::-1::1701686916::0::1::::InfoDisplay<>Panel<>::
 level_transition.gd::GDScript::-1::1699957631::0::1::::<>CanvasLayer<>::
 lose_menu.gd::GDScript::-1::1701385759::0::1::::<>ColorRect<>::
-main.gd::GDScript::-1::1701384210::0::1::::<>Node2D<>::
+main.gd::GDScript::-1::1701686343::0::1::::<>Node2D<>::
 main_menu.gd::GDScript::-1::1701686216::0::1::::<>CanvasLayer<>::
 pause_menu.gd::GDScript::-1::1701385743::0::1::::<>ColorRect<>::
 ready_screen.gd::GDScript::-1::1700184009::0::1::::<>ColorRect<>::
