@@ -1,15 +1,14 @@
+AudioStreamPlayer
+Node
 Label
 TextureRect
 NinePatchRect
 HBoxContainer
 TextureProgressBar
 CheckButton
-Node
 Sprite2D
 Marker2D
 CenterContainer
 Panel
 Button
 VBoxContainer
-MarginContainer
-TextureButton

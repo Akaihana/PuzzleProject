@@ -289,6 +289,7 @@ func reset_checked() -> void:
 
 func determine_next_phase() -> void:
 	if found_matches:
+		SoundManager.play_chain(current_chain)
 		current_chain += 1
 		found_matches = false
 		destroy_timer.start()
@@ -333,6 +334,7 @@ func match_and_dim(gem) -> void:
 
 
 func destroy_matched() -> void:
+	SoundManager.play_sound("gem_clear")
 	for r in ROWS:
 		for c in COLUMNS:
 			if grid[r][c] != null and grid[r][c].matched:
@@ -412,10 +414,11 @@ func make_gems_fall() -> void:
 						grid[current_row + 1][c] = null
 						current_row -= 1
 	found_matches = false
-	
+	SoundManager.play_sound("move")
 	if falling_gems:
 		fall_delay.start()
 	else:
+		SoundManager.play_sound("lock")
 		if Shared.is_flood_fill_mode:
 			check_for_matches_flood()
 		else:

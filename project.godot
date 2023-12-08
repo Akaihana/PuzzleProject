@@ -19,6 +19,7 @@ config/icon="res://Assets/Icons/icon.svg"
 
 Shared="*res://Scripts/shared.gd"
 LevelTransition="*res://Scenes/level_transition.tscn"
+SoundManager="*res://Scenes/sound_manager.tscn"
 
 [debug]
 

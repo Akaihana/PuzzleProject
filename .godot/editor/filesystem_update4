@@ -3,4 +3,7 @@ res://Scripts/main.gd
 res://Scenes/info_display.tscn
 res://Scenes/bar_display.tscn
 res://Scenes/Menus/main_menu.tscn
-res://Scripts/info_display.gd
+res://Scenes/sound_manager.tscn
+res://Scripts/sound_manager.gd
+res://Scripts/gem_container.gd
+res://Scripts/grid.gd

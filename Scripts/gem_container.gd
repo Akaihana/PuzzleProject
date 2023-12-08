@@ -42,11 +42,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("left"):
-		move(Vector2.LEFT)
+		move(Vector2.LEFT, true)
 		if hold_left_delay.is_stopped():
 			hold_left_delay.start()
 	elif Input.is_action_just_pressed("right"):
-		move(Vector2.RIGHT)
+		move(Vector2.RIGHT, true)
 		if hold_right_delay.is_stopped():
 			hold_right_delay.start()
 		
@@ -94,16 +94,18 @@ func generate_gems():
 	gem_two.paired_gem = gem_one
 
 
-func move(direction: Vector2) -> bool:
+func move(direction: Vector2, play_sound: bool) -> bool:
 	var new_position = calculate_global_position(direction, global_position)
 	if new_position != Vector2.ZERO:
 		global_position = new_position
+		if play_sound: 
+			SoundManager.play_sound("move")
 		return true
 	return false
 
 
 func tap_down():
-	if move(Vector2.DOWN):
+	if move(Vector2.DOWN, true):
 		move_down_timer.stop()
 		move_down_timer.start()
 
@@ -159,12 +161,13 @@ func rotate_gems(direction: int) -> void:
 	if not test_wall_kicks(rotation_index, direction):
 		rotation_index = original_rotation_index
 		apply_rotation(-direction)
+	SoundManager.play_sound("rotate")
 
 
 func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
 	for i in wall_kicks.size():
 		var translation = wall_kicks[i]
-		if move(translation):
+		if move(translation, false):
 			return true
 	return false
 
@@ -181,6 +184,7 @@ func apply_rotation(direction: int) -> void:
 
 
 func lock():
+	SoundManager.play_sound("lock")
 	move_down_timer.stop()
 	hold_down_timer.stop()
 	hold_left_timer.stop()
@@ -190,7 +194,7 @@ func lock():
 
 
 func _on_timer_timeout() -> void:
-	if not move(Vector2.DOWN):
+	if not move(Vector2.DOWN, false):
 		if grace_timer.is_stopped():
 			grace_timer.start()
 	else:
@@ -198,7 +202,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_hold_down_timer_timeout() -> void:
-	if not move(Vector2.DOWN):
+	if not move(Vector2.DOWN, true):
 		if grace_timer.is_stopped():
 			grace_timer.start()
 	else:
@@ -206,15 +210,15 @@ func _on_hold_down_timer_timeout() -> void:
 
 
 func _on_hold_left_timer_timeout() -> void:
-	move(Vector2.LEFT)
+	move(Vector2.LEFT, true)
 
 
 func _on_hold_right_timer_timeout() -> void:
-	move(Vector2.RIGHT)
+	move(Vector2.RIGHT, true)
 
 
 func _on_grace_timer_timeout() -> void:
-	if not move(Vector2.DOWN):
+	if not move(Vector2.DOWN, false):
 		lock()
 
 
