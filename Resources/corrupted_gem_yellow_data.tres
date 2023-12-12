@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://bsryo42au1ia5"]
 
 [ext_resource type="Texture2D" uid="uid://dgyxa643sc3vu" path="res://Assets/Sprites/Viruses/tileYellow_45.png" id="1_u6sae"]
-[ext_resource type="Script" path="res://Scripts/corrupted_gem_data.gd" id="2_0ibyl"]
+[ext_resource type="Script" path="res://Resources/Resource Scripts/corrupted_gem_data.gd" id="2_0ibyl"]
 
 [resource]
 script = ExtResource("2_0ibyl")

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://db3d05mnbs83p"]
 
 [ext_resource type="Texture2D" uid="uid://g76qul74kve" path="res://Assets/Sprites/Gems/tileGreen_39.png" id="1_yh1o6"]
-[ext_resource type="Script" path="res://Scripts/gem_data.gd" id="2_4staa"]
+[ext_resource type="Script" path="res://Resources/Resource Scripts/gem_data.gd" id="2_4staa"]
 [ext_resource type="Texture2D" uid="uid://bsgekx62cx85s" path="res://Assets/Sprites/Gems/tileGreen_42.png" id="2_cvllt"]
 
 [resource]

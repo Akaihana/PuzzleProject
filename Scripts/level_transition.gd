@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends CenterContainer
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cx05cwb0bkn61" path="res://Assets/Sprites/Gems/tileRed_39.png" id="1_dola1"]
 [ext_resource type="Texture2D" uid="uid://m163x00plwab" path="res://Assets/Sprites/Gems/tileRed_42.png" id="2_kux2q"]
-[ext_resource type="Script" path="res://Scripts/gem_data.gd" id="2_r6ui6"]
+[ext_resource type="Script" path="res://Resources/Resource Scripts/gem_data.gd" id="2_r6ui6"]
 
 [resource]
 script = ExtResource("2_r6ui6")

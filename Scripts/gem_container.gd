@@ -164,7 +164,7 @@ func rotate_gems(direction: int) -> void:
 	SoundManager.play_sound("rotate")
 
 
-func test_wall_kicks(rotation_index: int, rotation_direction: int) -> bool:
+func test_wall_kicks(_rotation_index: int, _rotation_direction: int) -> bool:
 	for i in wall_kicks.size():
 		var translation = wall_kicks[i]
 		if move(translation, false):

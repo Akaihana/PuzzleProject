@@ -1,12 +1,15 @@
 extends CanvasLayer
 
+@onready var menu: Control = %Menu
+@onready var settings_menu: Control = %SettingsMenu
+
 @onready var arcade_mode_button: Button = %ArcadeModeButton
-@onready var flood_fill_mode_toggle: CheckButton = $Container/VBoxContainer/FloodFillModeToggle
+
 
 func _ready() -> void:
 	get_tree().get_root().set_disable_input(false)
 	arcade_mode_button.grab_focus()
-	flood_fill_mode_toggle.button_pressed = Shared.is_flood_fill_mode
+	SoundManager.play_background_music("menu_music")
 
 
 func _on_arcade_mode_button_pressed() -> void:
@@ -19,17 +22,21 @@ func _on_outbreak_mode_button_pressed() -> void:
 	load_characte_select_scene()
 
 
+func load_characte_select_scene() -> void:
+	get_tree().get_root().set_disable_input(true)
+	get_tree().change_scene_to_file("res://Scenes/Menus/character_select.tscn")
+
+
+func _on_settings_button_pressed() -> void:
+	menu.hide()
+	settings_menu.show()
+
+
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
 
 
-func _on_flood_fill_mode_toggle_toggled(toggled_on: bool) -> void:
-	Shared.is_flood_fill_mode = toggled_on
-
-
-func load_characte_select_scene() -> void:
-	get_tree().get_root().set_disable_input(true)
-	get_tree().change_scene_to_file("res://Scenes/Menus/character_select.tscn")
-	
-
-
+func _on_menu_visibility_changed() -> void:
+	if get_node("Menu").visible:
+		if arcade_mode_button != null:
+			arcade_mode_button.grab_focus()

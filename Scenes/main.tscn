@@ -105,11 +105,19 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="FallDelay" type="Timer" parent="Grid"]
+[node name="FallDelayTimer" type="Timer" parent="Grid"]
 wait_time = 0.05
 one_shot = true
 
-[node name="WaveDelay" type="Timer" parent="Grid"]
+[node name="WaveDelayTimer" type="Timer" parent="Grid"]
+wait_time = 0.5
+one_shot = true
+
+[node name="WinDelayTimer" type="Timer" parent="Grid"]
+wait_time = 0.5
+one_shot = true
+
+[node name="LoseDelayTimer" type="Timer" parent="Grid"]
 wait_time = 0.5
 one_shot = true
 
@@ -149,5 +157,7 @@ script = ExtResource("14_i1moe")
 
 [connection signal="timeout" from="Grid/DestroyTimer" to="Grid" method="_on_destroy_timer_timeout"]
 [connection signal="timeout" from="Grid/FallTimer" to="Grid" method="_on_fall_timer_timeout"]
-[connection signal="timeout" from="Grid/FallDelay" to="Grid" method="_on_fall_delay_timeout"]
-[connection signal="timeout" from="Grid/WaveDelay" to="Grid" method="_on_wave_delay_timeout"]
+[connection signal="timeout" from="Grid/FallDelayTimer" to="Grid" method="_on_fall_delay_timeout"]
+[connection signal="timeout" from="Grid/WaveDelayTimer" to="Grid" method="_on_wave_delay_timeout"]
+[connection signal="timeout" from="Grid/WinDelayTimer" to="Grid" method="_on_win_delay_timer_timeout"]
+[connection signal="timeout" from="Grid/LoseDelayTimer" to="Grid" method="_on_lose_delay_timer_timeout"]

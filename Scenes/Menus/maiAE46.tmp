@@ -1,0 +1,135 @@
+[gd_scene load_steps=2 format=3 uid="uid://biohxdus3txop"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_hvfrl"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hvfrl")
+action_items = Array[String](["left", "right", "down", "rotate_left", "rotate_right", "ability_1", "ability_2"])
+
+[node name="MainMenuVContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 493.0
+offset_top = 238.0
+offset_right = 658.0
+offset_bottom = 409.0
+
+[node name="ArcadeModeButton" type="Button" parent="MainMenuVContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Arcade Mode"
+
+[node name="OutbreakModeButton" type="Button" parent="MainMenuVContainer"]
+layout_mode = 2
+text = "Outbreak Mode"
+
+[node name="SettingsButton" type="Button" parent="MainMenuVContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="MainMenuVContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="FloodFillModeToggle" type="CheckButton" parent="MainMenuVContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Flood Fill Mode"
+
+[node name="SettingsMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 927.0
+offset_bottom = 107.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsVContainer" type="VBoxContainer" parent="SettingsMenu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="SettingsMenu/MarginContainer/SettingsVContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsMenu/MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="SettingsMenu/MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+text = "Sound Effects Volume"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu/MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="ControllerSettingsLabel" type="Label" parent="SettingsMenu/MarginContainer/SettingsVContainer"]
+layout_mode = 2
+text = "Controller Settings
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsMenu/MarginContainer/SettingsVContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/MarginContainer/SettingsVContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ControllerSettingsGridContainer" type="GridContainer" parent="SettingsMenu/MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="InputLabel" type="Label" parent="SettingsMenu/MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer/ControllerSettingsGridContainer"]
+layout_mode = 2
+text = "Input Type"
+
+[node name="InputButton" type="OptionButton" parent="SettingsMenu/MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer/ControllerSettingsGridContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Keyboard"
+popup/item_0/id = 0
+popup/item_1/text = "Controller"
+popup/item_1/id = 1
+popup/item_1/disabled = true
+
+[node name="ReturnMainMenuButton" type="Button" parent="SettingsMenu/MarginContainer/SettingsVContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return to Main Menu"
+
+[connection signal="pressed" from="MainMenuVContainer/ArcadeModeButton" to="." method="_on_arcade_mode_button_pressed"]
+[connection signal="pressed" from="MainMenuVContainer/OutbreakModeButton" to="." method="_on_outbreak_mode_button_pressed"]
+[connection signal="pressed" from="MainMenuVContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainMenuVContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="toggled" from="MainMenuVContainer/FloodFillModeToggle" to="." method="_on_flood_fill_mode_toggle_toggled"]
+[connection signal="pressed" from="SettingsMenu/MarginContainer/SettingsVContainer/ReturnMainMenuButton" to="." method="_on_return_main_menu_button_pressed"]

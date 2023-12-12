@@ -7,5 +7,7 @@ script = ExtResource("1_o43lb")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -16.0
+bus = &"Music"
 
 [node name="SoundPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

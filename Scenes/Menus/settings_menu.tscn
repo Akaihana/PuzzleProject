@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2iw8vo2khfw2"]
+
+[ext_resource type="Script" path="res://Scripts/settings_menu.gd" id="1_rrxso"]
+
+[node name="SettingsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_rrxso")
+action_items = Array[String](["left", "right", "down", "rotate_left", "rotate_right", "ability_1", "ability_2"])
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -73.5
+offset_bottom = 73.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 382
+theme_override_constants/margin_right = 382
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.294118, 0.294118, 0.294118, 1)
+
+[node name="SettingsVContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="FloodFillModeToggle" type="CheckButton" parent="MarginContainer/SettingsVContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Flood Fill Mode"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/SettingsVContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/SettingsVContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/SettingsVContainer/GridContainer"]
+layout_mode = 2
+text = "Sound Effects Volume"
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/SettingsVContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="ControllerSettingsLabel" type="Label" parent="MarginContainer/SettingsVContainer"]
+layout_mode = 2
+text = "Controller Settings
+"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/SettingsVContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/SettingsVContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ControllerSettingsGridContainer" type="GridContainer" parent="MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 2
+
+[node name="InputLabel" type="Label" parent="MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer/ControllerSettingsGridContainer"]
+layout_mode = 2
+text = "Input Type"
+
+[node name="InputButton" type="OptionButton" parent="MarginContainer/SettingsVContainer/MarginContainer/VBoxContainer/ControllerSettingsGridContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Keyboard"
+popup/item_0/id = 0
+popup/item_1/text = "Controller"
+popup/item_1/id = 1
+popup/item_1/disabled = true
+
+[node name="ReturnButton" type="Button" parent="MarginContainer/SettingsVContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Return"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="toggled" from="MarginContainer/SettingsVContainer/FloodFillModeToggle" to="." method="_on_flood_fill_mode_toggle_toggled"]
+[connection signal="value_changed" from="MarginContainer/SettingsVContainer/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/SettingsVContainer/GridContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/SettingsVContainer/ReturnButton" to="." method="_on_return_button_pressed"]

@@ -1,9 +1,13 @@
 res://Scenes/main.tscn
-res://Scripts/main.gd
-res://Scenes/info_display.tscn
-res://Scenes/bar_display.tscn
-res://Scenes/Menus/main_menu.tscn
 res://Scenes/sound_manager.tscn
-res://Scripts/sound_manager.gd
+res://Scenes/Menus/main_menu.tscn
+res://Scenes/Menus/settings_menu.tscn
+res://Scenes/Menus/pause_menu.tscn
+res://Scripts/settings_menu.gd
+res://Resources/Resource Scripts/user_preferences.gd
+res://Scripts/main_menu.gd
+res://Scripts/Component Scripts/character_controller_component.gd
 res://Scripts/gem_container.gd
 res://Scripts/grid.gd
+res://Scripts/pause_menu.gd
+res://Scripts/sound_manager.gd

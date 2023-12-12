@@ -31,8 +31,11 @@ var corrupted_count_keeper: Array[int] = [0, 0, 0, 0]
 @onready var bottom_right_boundary: Marker2D = $BottomRightBoundary
 @onready var destroy_timer: Timer = $DestroyTimer
 @onready var fall_timer: Timer = $FallTimer
-@onready var fall_delay: Timer = $FallDelay
-@onready var wave_delay: Timer = $WaveDelay
+@onready var fall_delay_timer: Timer = $FallDelayTimer
+@onready var wave_delay_timer: Timer = $WaveDelayTimer
+@onready var win_delay_timer: Timer = $WinDelayTimer
+@onready var lose_delay_timer: Timer = $LoseDelayTimer
+
 @onready var info_display: Panel = $InfoDisplay
 @onready var ready_screen: ColorRect = $"../CanvasLayer/ReadyScreen"
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -55,6 +58,7 @@ func _ready() -> void:
 	ready_screen.visible = true
 	animation_player.play("ready")
 	await animation_player.animation_finished
+	SoundManager.play_background_music("game_music")
 	get_tree().paused = false
 	Shared.is_paused = false
 	ready_screen.visible = false
@@ -296,7 +300,7 @@ func determine_next_phase() -> void:
 	else:
 		current_chain = 1
 		if check_for_lose():
-			game_over.emit()
+			lose_delay_timer.start()
 		else:
 			if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
 				gem_locked.emit()
@@ -325,7 +329,7 @@ func spawn_next_wave():
 	current_wave += 1
 	info_display.update_level(current_wave)
 	start_wave()
-	wave_delay.start()
+	wave_delay_timer.start()
 
 
 func match_and_dim(gem) -> void:
@@ -350,7 +354,7 @@ func destroy_matched() -> void:
 	current_matches.clear()
 	if check_level_clear():
 		if Shared.current_game_mode as Shared.Game_modes == Shared.Game_modes.CLASSIC:
-			level_cleared.emit()
+			win_delay_timer.start()
 		else:
 			wave_cleared = true
 			fall_timer.start()
@@ -416,7 +420,7 @@ func make_gems_fall() -> void:
 	found_matches = false
 	SoundManager.play_sound("move")
 	if falling_gems:
-		fall_delay.start()
+		fall_delay_timer.start()
 	else:
 		SoundManager.play_sound("lock")
 		if Shared.is_flood_fill_mode:
@@ -471,6 +475,14 @@ func _on_fall_delay_timeout() -> void:
 
 func _on_wave_delay_timeout() -> void:
 	gem_locked.emit()
+
+
+func _on_win_delay_timer_timeout() -> void:
+	level_cleared.emit()
+
+
+func _on_lose_delay_timer_timeout() -> void:
+	game_over.emit()
 #endregion
 
 
@@ -511,5 +523,11 @@ func test_spawn() -> void:
 	corrupted_gem.gem_color = corrupted_gem_data.corrupted_gem_type
 	grid[random_r][random_c] = corrupted_gem
 #endregion
+
+
+
+
+
+
 
 
